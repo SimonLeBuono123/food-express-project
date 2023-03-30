@@ -7,10 +7,12 @@ A full stack school project
 cd customers
 
     npm install
+    npm install -D tailwindcss postcss autoprefixer
 
 cd restaurant
 
     npm install
+    npm install -D tailwindcss postcss autoprefixer
 
 cd server
 
