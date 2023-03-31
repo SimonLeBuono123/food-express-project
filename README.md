@@ -8,11 +8,15 @@ cd customers
 
     npm install
     npm install -D tailwindcss postcss autoprefixer
+    npm install react-router-dom
+    npm install react-easier
 
 cd restaurant
 
     npm install
     npm install -D tailwindcss postcss autoprefixer
+    npm install react-router-dom
+    npm install react-easier
 
 cd server
 

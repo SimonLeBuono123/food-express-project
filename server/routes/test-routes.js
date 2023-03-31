@@ -1,4 +1,4 @@
-import Router from "express";
+import Router, {request, response} from "express";
 import mongoose, { Schema } from "mongoose";
 
 const testRouter = Router();
@@ -10,7 +10,12 @@ const testSchema = new Schema({
 
 mongoose.model("tests", testSchema);
 
-router.post("/", async (request, response) => {
+testRouter.get("/", async (request, response)=> {
+  const test = await mongoose.models.tests.find()
+  response.json(test)
+})
+
+testRouter.post("/", async (request, response) => {
   const { testPro, amount } = request.body; //skickar json properties
   const test = new mongoose.models.tests({
     testPro,
