@@ -20,3 +20,6 @@ api.listen(port, () => {
 
 import testRouter from "./routes/test-routes.js";
 api.use("/rest/test", testRouter);
+
+import customersRouter from "./routes/customers-routes.js";
+api.use("/rest/customers", customersRouter);
