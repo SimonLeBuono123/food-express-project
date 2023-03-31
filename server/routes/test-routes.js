@@ -1,49 +1,45 @@
-import Router from "express"
-import mongoose, {Schema} from "mongoose";
+import Router from "express";
+import mongoose, { Schema } from "mongoose";
 
-const router = Router()
+const testRouter = Router();
 
 const testSchema = new Schema({
-    testPro: String,
-    amount: Number
-})
-
-mongoose.model('tests', testSchema)
-
-
-
-router.post("/", async (request, response) => {
-    const test = new mongoose.models.tests();
-    test.testPro = request.body.testPro;
-    test.amount = request.body.amount;
-    await test.save();
-    response.status(201).json({ result: "created" });
+  testPro: { type: String, unique: true, required: true }, //required: måste skriva rätt property namn, e.g vid post
+  amount: Number,
 });
 
+mongoose.model("tests", testSchema);
 
-/*
-router.post("/", (request, response)=>{
+router.post("/", async (request, response) => {
+  const { testPro, amount } = request.body; //skickar json properties
+  const test = new mongoose.models.tests({
+    testPro,
+    amount,
+  });
 
-    const homeOwners = request.body
-    let newHomeOwners
-
-    newHomeOwners = new mongoose.models.test({
-        testPro: request.body.testPro,
-        amount: request.body.amount,
+  await test
+    .save()
+    .then((result) => {
+      if (result.testPro !== null && result.amount !== null) {
+        return response.status(201).json({
+          message: "Successfully created",
+          data: { result },
+        });
+      }
     })
-})
-*/
+    .catch((error) => {
+        //11000 : duplicate key error (i mondoDB), trying to have 2 unique items
+      if (error.name === "MongoServerError" && error.code === 11000) {
+        return response.status(400).json({
+          message: "test already exists.",
+          data: { error },
+        });
+      }
+      return response.status(400).json({
+        message: "Error, see data for details",
+        data: { error },
+      });
+    });
+});
 
-/*
-router.post('/', async (request, response)=>{
-    const homeOwner = new mongoose.models.homeOwners()
-    homeOwner.name = request.body.name
-    homeOwner.rating = request.body.rating
-    homeOwner.email = request.body.email
-    homeOwner.password = getHash(request.body.password)
-
-    await homeOwner.save()
-    response.status(201).json(homeOwner)
-})
-*/
-export default router
+export default testRouter;
