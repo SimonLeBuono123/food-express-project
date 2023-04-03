@@ -1,3 +1,4 @@
+import LoginButton from "../components/LoginButton";
 import RegisterButton from "../components/RegisterButton";
 
 export default function () {
@@ -8,6 +9,7 @@ export default function () {
         h-screen
         flex justify-center items-center"
       >
+        <LoginButton/>
         <RegisterButton />
       </section>
     </main>
