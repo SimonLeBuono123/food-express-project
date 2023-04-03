@@ -20,10 +20,27 @@ export const GlobalProvider = ({ children }) => {
         setIsLoading(false)
     }
 
+    const registerAccount = async (fullName, email, password)=>{
+        setIsLoading(true)
+        const response = await fetch('/rest/customers', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                fullName: fullName,
+                email: email,
+                password: password
+            })
+        })
+        const result = await response.json()
+        console.log(result)
+        setIsLoading(false)
+    }
+
     return (
         <GlobalContext.Provider
             value={{
-                tests
+                tests,
+                registerAccount
             }}
         >
             {children}

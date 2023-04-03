@@ -15,12 +15,13 @@ mongoose.model("customers", customerSchema);
 
 customersRouter.post("/", async (request, response) => {
     const {fullName, email, password} = request.body;
+
     const newCustomer = new mongoose.models.customers({
         fullName,
         email,
         password: encrypt(password)
     });
-
+    console.log(newCustomer?.password)
     await newCustomer
         .save()
         .then((result) => {
