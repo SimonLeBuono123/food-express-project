@@ -1,4 +1,5 @@
 import {createContext, useEffect, useState} from "react";
+import {json} from "react-router-dom";
 
 
 const GlobalContext = createContext(null)
@@ -6,10 +7,53 @@ const GlobalContext = createContext(null)
 export const GlobalProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true)
     const [tests, setTests] = useState([])
+    const [auth, setAuth] = useState({loggedIn: false})
 
     useEffect(() => {
         void getTests()
+        void checkAuth()
     }, [])
+
+
+    const checkAuth = async () => {
+        setIsLoading(true)
+        const response = await fetch("/rest/customers/login")
+        console.log('loading auth')
+        const result = await response.json()
+        console.log('auth state: ', result)
+        setAuth(result)
+        setIsLoading(false)
+    }
+
+    const submitLogin = async(email, password) => {
+        setIsLoading(true)
+        const response = await fetch('/rest/customers/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        })
+        const result = await response.json()
+        console.log(result)
+        setIsLoading(false)
+        void checkAuth()
+    }
+
+    const submitLogout = async() => {
+        setIsLoading((true))
+        const response = await fetch('/rest/customers/login', {
+            method: 'DELETE'
+        })
+        const result = await response.json()
+        console.log(result)
+        setIsLoading(false)
+        setAuth({loggedIn:false})
+    }
+
 
     const getTests = async() => {
         setIsLoading(true)
@@ -19,6 +63,8 @@ export const GlobalProvider = ({ children }) => {
         setTests(result)
         setIsLoading(false)
     }
+
+
 
     const registerAccount = async (fullName, email, password)=>{
         setIsLoading(true)
@@ -40,7 +86,10 @@ export const GlobalProvider = ({ children }) => {
         <GlobalContext.Provider
             value={{
                 tests,
-                registerAccount
+                registerAccount,
+                submitLogout,
+                submitLogin,
+                auth
             }}
         >
             {children}
