@@ -24,9 +24,7 @@ export const GlobalProvider = ({ children }) => {
   const checkAuthentication = async () => {
     setIsLoading(true)
     const response = await fetch("/rest/restaurant/login")
-    console.log("Loading Auth")
     const result = await response.json()
-    console.log(`auth state: ${result}`)
     setAuthentication(result)
     setIsLoading(false)
   }
@@ -60,7 +58,6 @@ export const GlobalProvider = ({ children }) => {
     console.log(result)
     setIsLoading(false)
     setAuthentication({loggedIn: false})
-    alert('You have logged out')
     void checkAuthentication()
   }
 
