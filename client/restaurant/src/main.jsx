@@ -5,12 +5,14 @@ import './index.css'
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom";
 import LoginPage from "./pages/LoginPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import MenuPage from "./menu/MenuPage.jsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path={'/'} element={ <App />}>
             <Route index element={< HomePage />}/>
             <Route path={'/login'} element={< LoginPage />}/>
+            <Route path={'/menu'} element={<MenuPage/>}/>
 
 
         </Route>

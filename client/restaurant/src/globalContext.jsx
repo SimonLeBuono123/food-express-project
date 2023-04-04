@@ -6,17 +6,19 @@ export const GlobalProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [tests, setTests] = useState([]);
   const [authentication, setAuthentication] = useState({loggedIn: false})
+  const [items, setItems] = useState([])
 
   useEffect(() => {
     void getTests();
     void checkAuthentication()
+    void getItems()
   }, []);
 
   const getTests = async () => {
     setIsLoading(true);
     const response = await fetch("/rest/test");
     const result = await response.json();
-    console.log(result);
+    //console.log(result);
     setTests(result);
     setIsLoading(false);
   };
@@ -61,13 +63,25 @@ export const GlobalProvider = ({ children }) => {
     void checkAuthentication()
   }
 
+  const getItems = async () => {
+    setIsLoading(true);
+    const response = await fetch("/rest/items");
+    const result = await response.json();
+    console.log(result);
+    setItems(result);
+
+    setIsLoading(false);
+    console.log(items)
+  };
+
   return (
     <GlobalContext.Provider
       value={{
         tests,
         submitLogin,
         submitLogout,
-        authentication
+        authentication,
+        items
       }}
     >
       {children}
