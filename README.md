@@ -24,3 +24,4 @@ cd server
     npm i express
     npm i nodemon
     npm i concurrently nodemon
+    npm i express-session

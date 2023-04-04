@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import './index.css'
 import {GlobalProvider} from "./globalContext.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import {Outlet} from "react-easier";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
       <GlobalProvider>
-    <h1 className="bg-red-400
-    text-3xl font-bold underline">
-    Hello world!
-  </h1>
+        < Outlet />
       </GlobalProvider>
   )
 }
