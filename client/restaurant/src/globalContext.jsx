@@ -42,6 +42,11 @@ export const GlobalProvider = ({ children }) => {
     });
     const result = await response.json();
     console.log(result);
+    if (result.loggedIn === false) {
+      alert("Invalid email or password")
+    } else if (result.loggedIn === true) {
+      alert("You have successfully logged in")
+    }
     setIsLoading(false);
     //authenticate
   };

@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
+import globalContext from "../globalContext.jsx";
 
 export default function () {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {submitLogin} = useContext(globalContext)
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
