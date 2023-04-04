@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function () {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { submitLogin } = useContext(globalContext);
-  const { authentication } = useContext(globalContext);
+  const { submitLogin, authentication } = useContext(globalContext);
   const navigate = useNavigate();
 
   function handleEmailChange(event) {
