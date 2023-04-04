@@ -33,7 +33,7 @@ restaurantLoginRouter.get('/', async (request, response) => {
         })
         if (employee) {
 //respond
-            response.status(401)
+            response.status(200)
             response.json({
                 email: request.session.employee.email,
                 loggedIn: true
