@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
 import globalContext from "../globalContext.jsx";
+import {Link} from "react-router-dom";
 
 export default function () {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const {submitLogin} = useContext(globalContext)
+  const {authentication} = useContext(globalContext)
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
@@ -13,12 +15,18 @@ export default function () {
     setPassword(event.target.value);
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     submitLogin(email, password)
 
+    if (authentication.loggedIn) {
+      window.location.href="http://localhost:5173/"
+    }
+
     // handle form submission here
   };
+
+  console.log(authentication)
 
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto mt-10">
@@ -54,12 +62,15 @@ export default function () {
         />
       </div>
       <div className="flex items-center justify-between">
-        <button
+
+          <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
+          >
           Sign In
-        </button>
+          </button>
+
+
       </div>
     </form>
   );

@@ -1,4 +1,5 @@
 import LogInButton from "../components/LogInButton.jsx";
+import LogOutButton from "../components/LogOutButton.jsx";
 
 export default function() {
     return (

@@ -9,6 +9,7 @@ export const GlobalProvider = ({ children }) => {
 
   useEffect(() => {
     void getTests();
+    void checkAuthentication()
   }, []);
 
   const getTests = async () => {
@@ -44,19 +45,32 @@ export const GlobalProvider = ({ children }) => {
     console.log(result);
     if (result.loggedIn === false) {
       alert("Invalid email or password")
-    } else if (result.loggedIn === true) {
-      alert("You have successfully logged in")
     }
     setIsLoading(false);
     //authenticate
+    void checkAuthentication()
   };
+
+  const submitLogout = async ()=> {
+    setIsLoading(true)
+    const response = await fetch('/rest/restaurant/login', {
+      method: 'DELETE'
+    })
+    const result = await response.json()
+    console.log(result)
+    setIsLoading(false)
+    setAuthentication({loggedIn: false})
+    alert('You have logged out')
+    void checkAuthentication()
+  }
 
   return (
     <GlobalContext.Provider
       value={{
         tests,
         submitLogin,
-        checkAuthentication
+        submitLogout,
+        authentication
       }}
     >
       {children}
