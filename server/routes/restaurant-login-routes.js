@@ -41,14 +41,14 @@ restaurantLoginRouter.get('/', async (request, response) => {
             return
         }
     }
-    response.status(401)
+    response.status(200)
     response.json({loggedIn: false})
 })
 
 restaurantLoginRouter.delete('/', async (request, response) => {
 
     delete (request.session.employee)
-    response.status(401)
+    response.status(200)
     response.json({loggedIn: false})
 })
 
