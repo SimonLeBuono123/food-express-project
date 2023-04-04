@@ -50,4 +50,4 @@ import employeesRouter from "./routes/employees-routes.js";
 api.use("/rest/employees", employeesRouter);
 
 import restaurantLoginRouter from "./routes/restaurant-login-routes.js";
-api.use("/rest/restaurant-login", restaurantLoginRouter);
+api.use("/rest/restaurant/login", restaurantLoginRouter);
