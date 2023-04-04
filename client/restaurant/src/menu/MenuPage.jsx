@@ -1,24 +1,22 @@
-import {useState, useContext, useEffect} from "react";
-import globalContext from '../globalContext.jsx'
+import { useState, useContext, useEffect } from "react";
+import globalContext from "../globalContext.jsx";
 
 export default function () {
+  const { items } = useContext(globalContext);
+  const [allItems, setAllItems] = useState([]);
 
-    const { allItems } = useContext(globalContext)
-    const [items, setItems] = useState()
-/*
-    useEffect(()=>{
-        setItems(allItems)
-    }, [] )
-*/
+  useEffect(() => {
+    setAllItems(items);
+  }, [items]);
 
-    console.log(allItems)
+  console.log(allItems)
+  return (
+    <section className={"h-screen w-screen flex"}>
+      <h2>Main</h2>
 
-    return <section className={'h-screen w-screen flex'}>
-        <h2>Main</h2>
+      <h2>Condiments</h2>
 
-        <h2>Condiments</h2>
-
-        <h2>Drinks</h2>
-
-        </section>
+      <h2>Drinks</h2>
+    </section>
+  );
 }

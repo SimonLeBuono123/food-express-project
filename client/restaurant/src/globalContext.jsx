@@ -5,13 +5,13 @@ const GlobalContext = createContext(null);
 export const GlobalProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [tests, setTests] = useState([]);
-  const [authentication, setAuthentication] = useState({loggedIn: false})
-  const [items, setItems] = useState([])
+  const [authentication, setAuthentication] = useState({ loggedIn: false });
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     void getTests();
-    void checkAuthentication()
-    void getItems()
+    void checkAuthentication();
+    void getItems();
   }, []);
 
   const getTests = async () => {
@@ -24,12 +24,12 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const checkAuthentication = async () => {
-    setIsLoading(true)
-    const response = await fetch("/rest/restaurant/login")
-    const result = await response.json()
-    setAuthentication(result)
-    setIsLoading(false)
-  }
+    setIsLoading(true);
+    const response = await fetch("/rest/restaurant/login");
+    const result = await response.json();
+    setAuthentication(result);
+    setIsLoading(false);
+  };
 
   const submitLogin = async (email, password) => {
     setIsLoading(true);
@@ -44,34 +44,32 @@ export const GlobalProvider = ({ children }) => {
     const result = await response.json();
     console.log(result);
     if (result.loggedIn === false) {
-      alert("Invalid email or password")
+      alert("Invalid email or password");
     }
     setIsLoading(false);
     //authenticate
-    void checkAuthentication()
+    void checkAuthentication();
   };
 
-  const submitLogout = async ()=> {
-    setIsLoading(true)
-    const response = await fetch('/rest/restaurant/login', {
-      method: 'DELETE'
-    })
-    const result = await response.json()
-    console.log(result)
-    setIsLoading(false)
-    setAuthentication({loggedIn: false})
-    void checkAuthentication()
-  }
+  const submitLogout = async () => {
+    setIsLoading(true);
+    const response = await fetch("/rest/restaurant/login", {
+      method: "DELETE",
+    });
+    const result = await response.json();
+    console.log(result);
+    setIsLoading(false);
+    setAuthentication({ loggedIn: false });
+    void checkAuthentication();
+  };
 
   const getItems = async () => {
     setIsLoading(true);
     const response = await fetch("/rest/items");
     const result = await response.json();
     console.log(result);
-    setItems(result);
-
+    setItems([...result]);
     setIsLoading(false);
-    console.log(items)
   };
 
   return (
@@ -81,7 +79,8 @@ export const GlobalProvider = ({ children }) => {
         submitLogin,
         submitLogout,
         authentication,
-        items
+        items,
+        getItems
       }}
     >
       {children}
