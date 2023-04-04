@@ -1,5 +1,6 @@
 import {createContext, useEffect, useState} from "react";
 import {json} from "react-router-dom";
+import * as trace_events from "trace_events";
 
 
 const GlobalContext = createContext(null)
@@ -8,9 +9,11 @@ export const GlobalProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true)
     const [tests, setTests] = useState([])
     const [auth, setAuth] = useState({loggedIn: false})
+    const [items, setItems] = useState([])
 
     useEffect(() => {
         void getTests()
+        void getItems()
         void checkAuth()
     }, [])
 
@@ -54,6 +57,15 @@ export const GlobalProvider = ({ children }) => {
         setAuth({loggedIn:false})
     }
 
+    const getItems = async ()=> {
+        setIsLoading(true)
+        const response = await fetch('/rest/items')
+        const result = await response.json()
+        console.log(result)
+        setItems(result)
+        setIsLoading(false)
+    }
+
 
     const getTests = async() => {
         setIsLoading(true)
@@ -89,7 +101,8 @@ export const GlobalProvider = ({ children }) => {
                 registerAccount,
                 submitLogout,
                 submitLogin,
-                auth
+                auth,
+                items
             }}
         >
             {children}

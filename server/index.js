@@ -1,5 +1,5 @@
 import express from "express";
-import mongoose from "mongoose";
+import mongoose, {Schema} from "mongoose";
 import { password } from "./password.js";
 
 import session from 'express-session'
@@ -42,6 +42,12 @@ api.listen(port, () => {
   });
 });
 
+const categorySchema = new Schema({
+  name: { type: String, unique: true, primaryKey: true}}
+  ,{collection:  "categories" }
+)
+mongoose.model('categories', categorySchema)
+
 import testRouter from "./routes/test-routes.js";
 api.use("/rest/test", testRouter);
 
@@ -50,3 +56,6 @@ api.use("/rest/customers", customersRouter);
 
 import loginRouter from "./routes/customers-login.js";
 api.use("/rest/customers", loginRouter)
+
+import itemRoutes from "./routes/item-routes.js"
+api.use("/rest/items", itemRoutes)
