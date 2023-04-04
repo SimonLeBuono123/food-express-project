@@ -66,3 +66,6 @@ api.use("/rest/restaurant/login", restaurantLoginRouter);
 
 import itemRoutes from "./routes/item-routes.js"
 api.use("/rest/items", itemRoutes)
+
+import orderRouter from "./routes/order-routes.js"
+api.use("/rest/order", orderRouter)
