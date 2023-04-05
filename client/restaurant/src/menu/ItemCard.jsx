@@ -9,7 +9,7 @@ export default function ({title, types, allItems, setAllItems}) {
     const handleClick = (event) => {
         event.preventDefault()
         deleteItem(event.target.id)
-        setTimeout(window.location.reload(), 1000)
+        setTimeout(window.location.reload(), 2000)
     }
 
     let category
@@ -22,7 +22,7 @@ export default function ({title, types, allItems, setAllItems}) {
                 <div>
                     <div className='flex'>
                         <h2 className="font-bold">{type.name}</h2>
-                        <p className='text-red-500 cursor-pointer' id={type._id} onClick={handleClick}>DELETE</p>
+                        <button className='text-red-500 cursor-pointer' id={type._id} onClick={handleClick}>DELETE</button>
                     </div>
                     <p>{type.ingredients}</p>
                     <p>{type.price} SEK</p>
@@ -37,21 +37,21 @@ export default function ({title, types, allItems, setAllItems}) {
             <h2 className="font-bold text-white bg-blue-500 p-1 flex justify-between cursor-pointer">
                 {title}{" "}
                 {!isAdding ? (
-                    <p
+                    <button
                         onClick={() => {
                             setIsAdding(true);
                         }}
                     >
                         add item
-                    </p>
+                    </button>
                 ) : (
-                    <p
+                    <button
                         onClick={() => {
                             setIsAdding(false);
                         }}
                     >
                         close
-                    </p>
+                    </button>
                 )}
             </h2>
             {isAdding ? <NewItemForm category={category} allItems={allItems} setAllItems={setAllItems}/> : null}
