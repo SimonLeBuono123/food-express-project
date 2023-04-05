@@ -1,37 +1,47 @@
-import React from 'react';
+import React, { useState } from "react";
+import NewItemForm from "./NewItemForm";
 
+export default function ({ title, types }) {
+  const [isAdding, setIsAdding] = useState(false);
 
-export default function({types}) {
+  /*     const { name, ingredients, categories, price} = details */
 
-console.log(types)
-
-    const listItems = types.map((type)=>{
-        return (
-            <li key={type._id} className='flex items-center justify-between m-5'>
-                <div>
-                    <h2>{type.name}</h2>
-                </div>
-            </li>
-        )
-    })
-console.log(listItems)
-    return <>
-        <h3>
-            {types.categories}
-        </h3>
-        <ul>
-            {listItems}
-        </ul>
-    </>
-       /*
-        <div className="bg-white w-64 h-32 flex flexbox flex-col rounded-xl shadow-lg pr-3 justify-center item-center">
-
-            <h3 className="text-center underline">{name}</h3>
-            <p>Ingredients: {ingredients}</p>
-            <p className="text-end">{categories.name}</p>
-            <p className="text-end">{price}</p>
+  const listItems = types.map((type) => {
+    return (
+      <li key={type._id} className="flex items-center justify-between m-5">
+        <div>
+          <h2 className="font-bold">{type.name}</h2>
+          <p>{type.ingredients}</p>
+          <p>{type.price} SEK</p>
         </div>
-        */
+      </li>
+    );
+  });
 
-
+  return (
+    <div className="flex flex-col w-[20rem]">
+      <h2 className="font-bold text-white bg-blue-500 p-1 flex justify-between cursor-pointer">
+        {title}{" "}
+        {!isAdding ? (
+          <p
+            onClick={() => {
+              setIsAdding(true);
+            }}
+          >
+            add item
+          </p>
+        ) : (
+          <p
+            onClick={() => {
+              setIsAdding(false);
+            }}
+          >
+            close
+          </p>
+        )}
+      </h2>
+      {isAdding ? <NewItemForm/> : null}
+      <ul>{listItems}</ul>
+    </div>
+  );
 }

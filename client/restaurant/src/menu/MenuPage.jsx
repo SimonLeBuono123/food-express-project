@@ -10,25 +10,16 @@ export default function () {
     setAllItems(items);
   }, [...items]);
 
-console.log(allItems)
-    const mains = items.filter(item => item.categories.name === "Main")
-    const sides = items.filter(item => item.categories.name === "Side")
-    const drinks = items.filter(item => item.categories.name === "Drink")
+  console.log(allItems);
+  const mains = items.filter((item) => item.categories.name === "Main");
+  const sides = items.filter((item) => item.categories.name === "Side");
+  const drinks = items.filter((item) => item.categories.name === "Drink");
 
   return (
-    <section className={"h-screen w-screen flex justify-center m-5"}>
-        <div className='flex flex-col'>
-      <h2>Main</h2>
-        < ItemCard types={mains}/>
-        </div>
-        <div className='flex flex-col'>
-        <h2>Condiments</h2>
-        < ItemCard types={sides}/>
-        </div>
-        <div className='flex flex-col'>
-        <h2>Drinks</h2>
-        <ItemCard types={drinks}/>
-        </div>
+    <section className={"h-screen w-screen flex flex-col m-5"}>
+      <ItemCard title={"Main"} types={mains} />
+      <ItemCard title={"Sides"} types={sides} />
+      <ItemCard title={"Drinks"} types={drinks} />
     </section>
   );
 }
