@@ -17,9 +17,9 @@ export default function () {
 
   return (
     <section className={"h-screen w-screen flex flex-col m-5"}>
-      <ItemCard title={"Main"} types={mains} />
-      <ItemCard title={"Sides"} types={sides} />
-      <ItemCard title={"Drinks"} types={drinks} />
+      <ItemCard title={"Main"} types={mains} items={items} setAllItems={setAllItems} />
+      <ItemCard title={"Sides"} types={sides} items={items} setAllItems={setAllItems}/>
+      <ItemCard title={"Drinks"} types={drinks} items={items} setAllItems={setAllItems}/>
     </section>
   );
 }

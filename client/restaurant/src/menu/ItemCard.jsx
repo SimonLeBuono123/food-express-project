@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import NewItemForm from "./NewItemForm";
 
-export default function ({ title, types }) {
+export default function ({ title, types, items, setAllItems }) {
   const [isAdding, setIsAdding] = useState(false);
 
-  /*     const { name, ingredients, categories, price} = details */
+    let category
 
   const listItems = types.map((type) => {
+      category = type.categories._id
     return (
       <li key={type._id} className="flex items-center justify-between m-5">
         <div>
@@ -17,6 +18,8 @@ export default function ({ title, types }) {
       </li>
     );
   });
+
+
 
   return (
     <div className="flex flex-col w-[20rem]">
@@ -40,7 +43,7 @@ export default function ({ title, types }) {
           </p>
         )}
       </h2>
-      {isAdding ? <NewItemForm/> : null}
+      {isAdding ? <NewItemForm category={category} setAllItems={setAllItems}/> : null}
       <ul>{listItems}</ul>
     </div>
   );

@@ -72,6 +72,23 @@ export const GlobalProvider = ({ children }) => {
     setIsLoading(false);
   };
 
+  const postItem = async (name, ingredients, category, price) => {
+    setIsLoading(true);
+    const response = await fetch("/rest/items", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({
+        name: name,
+        ingredients: ingredients,
+        categories: {_id: category},
+        price: price
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    setIsLoading(false);
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -80,7 +97,8 @@ export const GlobalProvider = ({ children }) => {
         submitLogout,
         authentication,
         items,
-        getItems
+        getItems,
+        postItem
       }}
     >
       {children}

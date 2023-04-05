@@ -28,10 +28,13 @@ itemRoutes.post('/', async(request, response)=> {
         price
     })
     await newItem.save()
+        response.json(newItem)
     }catch(error){
         console.error(error)
     }
+
 })
+
 
 itemRoutes.get('/', async (request, response) => {
     const item = await mongoose.models.items.find().populate('categories').exec()

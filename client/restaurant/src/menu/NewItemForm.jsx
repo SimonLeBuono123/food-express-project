@@ -1,14 +1,15 @@
 import { useState } from "react";
 
-export default function () {
+export default function ({category, items, setAllItems}) {
   const [name, setName] = useState();
   const [ingredients, setIngredients] = useState();
   const [price, setPrice] = useState();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let newItem = { name: name, ingredients: ingredients, categories: "TBA", price: price };
+    let newItem = { name: name, ingredients: ingredients, categories: category, price: price };
     console.log(newItem);
+    setAllItems([...items, newItem])
   };
 
   return (
@@ -31,7 +32,7 @@ export default function () {
           placeholder="Enter ingredients"
         />
         <input
-          type="text"
+          type="number"
           name="item"
           id="item"
           onChange={(event) => setPrice(event.target.value)}
