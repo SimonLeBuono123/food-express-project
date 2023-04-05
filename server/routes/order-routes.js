@@ -1,4 +1,4 @@
-import {response, Router} from "express";
+import express, {response, Router} from "express";
 import mongoose, {Schema} from "mongoose"
 
 const orderRouter = Router()
@@ -16,12 +16,14 @@ const orderSchema = new Schema(
 
 mongoose.model('orders', orderSchema)
 
+// mongoose.models.orders.watch().on('change', data => console.log(data))
+
 orderRouter.get('/', async (request, response) =>{
         const order = await mongoose.models.orders.find()
             .populate({path: 'items', select: 'name'})
             .populate({path: 'customers', select: 'fullName'})
             .exec()
-        response.json(order)
+        response.json(order )
 })
 
 orderRouter.post('/', async(request, response)=> {
@@ -32,11 +34,13 @@ orderRouter.post('/', async(request, response)=> {
                 isDelivered,
                 totalPrice
         })
-        await newOrder.save().then((result)=> {
 
-                return response.json({message: result})}).catch((error)=>{
-                        return response.json({message: error})
+        await newOrder.save().then((result)=> {
+                        return response.json({message: result})
+        }).catch((error)=>{
+                        return response.json( {message: error})
                 })
+
 
 })
 

@@ -1,6 +1,7 @@
 import {createContext, useEffect, useState} from "react";
 import {json} from "react-router-dom";
 import * as trace_events from "trace_events";
+import orderPage from "./pages/OrderPage.jsx";
 
 
 const GlobalContext = createContext(null)
@@ -11,12 +12,16 @@ export const GlobalProvider = ({ children }) => {
     const [auth, setAuth] = useState({loggedIn: false})
     const [items, setItems] = useState([])
     const [orderArray, setOrderArray] = useState([])
+    const [order, setOrder] = useState([])
 
     useEffect(() => {
         void getTests()
         void getItems()
         void checkAuth()
     }, [])
+
+
+
 
 
     const checkAuth = async () => {
@@ -67,6 +72,30 @@ export const GlobalProvider = ({ children }) => {
         setIsLoading(false)
     }
 
+    const postOrder = async(items) => {
+        setIsLoading(true)
+        const response = await fetch('/rest/order', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                items
+            })
+        })
+        const result = await response.json()
+        console.log(result)
+        setIsLoading(false)
+        void getOrder()
+    }
+
+    const getOrder = async() => {
+        setIsLoading(true)
+        const response = await fetch ('/rest/order')
+        const result = await response.json()
+        console.log(result)
+        setOrder(result)
+        setIsLoading(false)
+    }
+
 
     const getTests = async() => {
         setIsLoading(true)
@@ -105,7 +134,8 @@ export const GlobalProvider = ({ children }) => {
                 auth,
                 items,
                 orderArray,
-                setOrderArray
+                setOrderArray,
+                postOrder
             }}
         >
             {children}

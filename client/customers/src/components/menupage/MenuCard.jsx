@@ -2,17 +2,14 @@ import React, {useContext} from 'react';
 import globalContext from "../../globalContext.jsx";
 
 
-function MenuCard({details}) {
-    const {setOrderArray, orderArray} = useContext(globalContext)
+function MenuCard({details, handleClick}) {
+    const {setOrderArray, orderArray, items} = useContext(globalContext)
     const {_id, name, ingredients, categories, price} = details
-    let tempArr = []
 
-
-    function addItem(array, value) {
-        array.push(value)
-    }
     function handleClick(e) {
-        setOrderArray(orderArray => [...orderArray, e.target.value])
+        const filteredItem = items.filter((item) => item?._id === e.target.value)
+        setOrderArray(orderArray => [...orderArray, filteredItem[0]])
+        return orderArray
     }
 
     return (
@@ -20,7 +17,7 @@ function MenuCard({details}) {
 
             <h3 className="text-center underline" >{name}</h3>
             <p>Ingredients: {ingredients}</p>
-            <p className="text-end">{categories.name}</p>
+             <p className="text-end">{categories.name}</p>
             <p className="text-end">{price}</p>
             <button value={_id}  onClick={handleClick}>Place Order</button>
         </div>

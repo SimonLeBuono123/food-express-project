@@ -1,19 +1,18 @@
 import React, {useContext, useEffect} from 'react';
 import MenuCard from "../components/menupage/MenuCard.jsx";
 import globalContext from "../globalContext.jsx";
+import {Link} from "react-router-dom";
 
 function MenuPage() {
-    const {items, setOrderArray, orderArray } = useContext(globalContext)
-    let itemsClone = structuredClone(items)
-    console.log('cloned item', itemsClone)
-
-    useEffect(() => {
-        console.log(orderArray)
-    }, [orderArray])
+    const {items, setOrderArray, orderArray} = useContext(globalContext)
 
     const filterMain = items.filter(item => item.categories.name === "Main")
     const filterSide = items.filter(item => item.categories.name === "Side")
     const filterDrink = items.filter(item => item.categories.name === "Drink")
+
+    useEffect(() => {
+        console.log(orderArray)
+    },[orderArray])
 
     return (<>
         <h1 className="w-full">Menu</h1>
@@ -33,6 +32,7 @@ function MenuPage() {
 
                 {filterDrink.map( (item) => {return <MenuCard key={item['_id']} details={item} />})}
             </div>
+                <Link to={'/order'}>Send me to order</Link>
             </div>
         </>
     );

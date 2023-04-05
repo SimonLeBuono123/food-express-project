@@ -7,6 +7,7 @@ import { GlobalProvider } from "./globalContext.jsx";
 function App() {
   return (
     <>
+        <p>Hej</p>
       <GlobalProvider>
         <Outlet />
       </GlobalProvider>
