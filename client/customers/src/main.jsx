@@ -6,8 +6,8 @@ import './index.css'
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom";
 import RegisterForm from './components/RegisterForm'
 import LoginPage from './pages/LoginPage'
-import menuPage from "./pages/MenuPage.jsx";
 import MenuPage from "./pages/MenuPage.jsx";
+import OrderPage from "./pages/OrderPage.jsx";
 
 
 const router = createBrowserRouter(
@@ -15,6 +15,7 @@ const router = createBrowserRouter(
         <Route path={'/'} element={<App/>}>
             <Route index element={<HomePage/>}/>
             <Route path={'/menu'} element={<MenuPage/>}></Route>
+            <Route path={'/order'} element={<OrderPage/>}></Route>
             <Route path={'/register'} element={<RegisterForm/>}/>
             <Route path={'/login'} element={<LoginPage/>}/>
         </Route>

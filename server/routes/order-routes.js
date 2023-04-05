@@ -10,7 +10,7 @@ const orderSchema = new Schema(
         orderDate: {type: Date, default: Date()},
         endDate: {type: Date, default: null},
         isDelivered: {type: String, default: "Waiting for Restaurant"},
-        totalPrice: Number
+        totalPrice: {type: Number, default: 0}
     }
 )
 

@@ -10,6 +10,7 @@ export const GlobalProvider = ({ children }) => {
     const [tests, setTests] = useState([])
     const [auth, setAuth] = useState({loggedIn: false})
     const [items, setItems] = useState([])
+    const [orderArray, setOrderArray] = useState([])
 
     useEffect(() => {
         void getTests()
@@ -102,7 +103,9 @@ export const GlobalProvider = ({ children }) => {
                 submitLogout,
                 submitLogin,
                 auth,
-                items
+                items,
+                orderArray,
+                setOrderArray
             }}
         >
             {children}
