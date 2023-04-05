@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NewItemForm from "./NewItemForm";
 
-export default function ({ title, types, items, setAllItems }) {
+export default function ({ title, types, allItems, setAllItems }) {
   const [isAdding, setIsAdding] = useState(false);
 
     let category
@@ -43,7 +43,7 @@ export default function ({ title, types, items, setAllItems }) {
           </p>
         )}
       </h2>
-      {isAdding ? <NewItemForm category={category} setAllItems={setAllItems}/> : null}
+      {isAdding ? <NewItemForm category={category} allItems={allItems} setAllItems={setAllItems}/> : null}
       <ul>{listItems}</ul>
     </div>
   );

@@ -8,7 +8,7 @@ export default function () {
 
   useEffect(() => {
     setAllItems(items);
-  }, [...items]);
+  }, [items]);
 
   console.log(allItems);
   const mains = items.filter((item) => item.categories.name === "Main");
@@ -17,9 +17,9 @@ export default function () {
 
   return (
     <section className={"h-screen w-screen flex flex-col m-5"}>
-      <ItemCard title={"Main"} types={mains} items={items} setAllItems={setAllItems} />
-      <ItemCard title={"Sides"} types={sides} items={items} setAllItems={setAllItems}/>
-      <ItemCard title={"Drinks"} types={drinks} items={items} setAllItems={setAllItems}/>
+      <ItemCard title={"Main"} types={mains} allItems={allItems} setAllItems={setAllItems} />
+      <ItemCard title={"Sides"} types={sides} allItems={allItems} setAllItems={setAllItems}/>
+      <ItemCard title={"Drinks"} types={drinks} allItems={allItems} setAllItems={setAllItems}/>
     </section>
   );
 }

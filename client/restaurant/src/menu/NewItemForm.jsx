@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import globalContext from "../globalContext";
 
-export default function ({category, items, setAllItems}) {
+export default function ({ category, allItems, setAllItems }) {
+  const { items } = useContext(globalContext);
   const [name, setName] = useState();
   const [ingredients, setIngredients] = useState();
   const [price, setPrice] = useState();
+  const { postItem } = useContext(globalContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let newItem = { name: name, ingredients: ingredients, categories: category, price: price };
-    console.log(newItem);
-    setAllItems([...items, newItem])
+    postItem(name, ingredients, category, parseFloat(price));
+    window.location.reload()
   };
 
   return (

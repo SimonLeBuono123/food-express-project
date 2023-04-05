@@ -73,6 +73,7 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const postItem = async (name, ingredients, category, price) => {
+
     setIsLoading(true);
     const response = await fetch("/rest/items", {
       method: "POST",
