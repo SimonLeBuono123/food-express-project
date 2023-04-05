@@ -10,8 +10,10 @@ export default function ({ category, allItems, setAllItems }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(name, ingredients, price, category)
     postItem(name, ingredients, category, parseFloat(price));
-    window.location.reload()
+    setTimeout(window.location.reload(), 1000)
+
   };
 
   return (

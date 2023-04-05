@@ -1,5 +1,6 @@
 import Router from "express";
 import mongoose, {Schema} from "mongoose";
+import restaurantLoginRouter from "./restaurant-login-routes.js";
 
 
 const itemRoutes = Router();
@@ -39,6 +40,19 @@ itemRoutes.post('/', async(request, response)=> {
 itemRoutes.get('/', async (request, response) => {
     const item = await mongoose.models.items.find().populate('categories').exec()
     response.json(item)
+})
+
+
+itemRoutes.delete('/:id', async (request, response) => {
+    try {
+        const item = await mongoose.models.items.findByIdAndDelete(request.params.id)
+
+        response.status(200)
+        response.json(item)
+    }catch(error){
+            console.error(error)
+            response.status(404).json('not found')
+        }
 })
 
 

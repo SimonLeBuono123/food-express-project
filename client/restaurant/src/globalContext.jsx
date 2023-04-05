@@ -90,6 +90,16 @@ export const GlobalProvider = ({ children }) => {
     setIsLoading(false);
   };
 
+  const deleteItem = async (id)=> {
+    setIsLoading(true)
+    const response = await fetch(`/rest/items/${id}`, {
+      method: "DELETE"}
+        )
+    const result = await response.json()
+    console.log(result)
+    setIsLoading(false)
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -99,7 +109,8 @@ export const GlobalProvider = ({ children }) => {
         authentication,
         items,
         getItems,
-        postItem
+        postItem,
+        deleteItem
       }}
     >
       {children}
