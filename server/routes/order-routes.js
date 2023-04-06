@@ -1,4 +1,4 @@
-import express, {response, Router} from "express";
+import express, {request, Router} from "express";
 import mongoose, {Schema} from "mongoose"
 
 const orderRouter = Router()
@@ -6,7 +6,7 @@ const orderRouter = Router()
 const orderSchema = new Schema(
     {
         items: [{type: mongoose.Schema.Types.ObjectId, ref: "items"}],
-        customers: {type: mongoose.Schema.Types.ObjectId, ref: "customers"},
+        customers: {type: mongoose.Schema.Types.ObjectId, ref: "customers", required: true},
         orderDate: {type: Date, default: Date()},
         endDate: {type: Date, default: null},
         isDelivered: {type: String, default: "Waiting for Restaurant"},
@@ -21,7 +21,7 @@ mongoose.model('orders', orderSchema)
 orderRouter.get('/', async (request, response) =>{
         const order = await mongoose.models.orders.find()
             .populate({path: 'items', select: 'name'})
-            .populate({path: 'customers', select: 'fullName'})
+            .populate({path: 'customers', select: ['fullName', 'email']})
             .exec()
         response.json(order )
 })
@@ -43,5 +43,7 @@ orderRouter.post('/', async(request, response)=> {
 
 
 })
+
+
 
 export default orderRouter

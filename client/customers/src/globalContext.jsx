@@ -13,11 +13,12 @@ export const GlobalProvider = ({ children }) => {
     const [items, setItems] = useState([])
     const [orderArray, setOrderArray] = useState([])
     const [order, setOrder] = useState([])
-
+    console.log(order)
     useEffect(() => {
         void getTests()
         void getItems()
         void checkAuth()
+        void getOrder()
     }, [])
 
 
@@ -87,6 +88,8 @@ export const GlobalProvider = ({ children }) => {
         void getOrder()
     }
 
+
+
     const getOrder = async() => {
         setIsLoading(true)
         const response = await fetch ('/rest/order')
@@ -135,7 +138,8 @@ export const GlobalProvider = ({ children }) => {
                 items,
                 orderArray,
                 setOrderArray,
-                postOrder
+                postOrder,
+                order
             }}
         >
             {children}
