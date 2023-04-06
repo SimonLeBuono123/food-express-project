@@ -5,21 +5,22 @@ import ItemCard from "./ItemCard.jsx";
 export default function () {
   const { items } = useContext(globalContext);
   const [allItems, setAllItems] = useState([]);
+  const [mains, setMains] = useState([]);
+  const [sides, setSides] = useState([]);
+  const [drinks, setDrinks] = useState([]);
 
   useEffect(() => {
     setAllItems(items);
+    setMains(items.filter((item) => item.categories.name === "Main"));
+    setSides(items.filter((item) => item.categories.name === "Side"));
+    setDrinks(items.filter((item) => item.categories.name === "Drink"));
   }, [items]);
 
-  console.log(allItems);
-  const mains = items.filter((item) => item.categories.name === "Main");
-  const sides = items.filter((item) => item.categories.name === "Side");
-  const drinks = items.filter((item) => item.categories.name === "Drink");
-
   return (
-    <section className={"h-screen w-screen flex flex-col m-5"}>
-      <ItemCard title={"Main"} types={mains} allItems={allItems} setAllItems={setAllItems} />
-      <ItemCard title={"Sides"} types={sides} allItems={allItems} setAllItems={setAllItems}/>
-      <ItemCard title={"Drinks"} types={drinks} allItems={allItems} setAllItems={setAllItems}/>
+    <section className={"h-screen w-screen flex flex-col m-5 md:flex-row"}>
+      <ItemCard title={"Main"} types={mains} setTypes={setMains} />
+      <ItemCard title={"Sides"} types={sides} setTypes={setSides} />
+      <ItemCard title={"Drinks"} types={drinks} setTypes={setDrinks} />
     </section>
   );
 }

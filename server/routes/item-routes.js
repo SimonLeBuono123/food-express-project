@@ -16,14 +16,18 @@ mongoose.model("items", itemSchema);
 itemRoutes.post("/", async (request, response) => {
   const { name, ingredients, categories, price } = request.body;
   try {
-    const newItem = new mongoose.models.items({
-      name,
-      ingredients,
-      categories,
-      price,
-    });
-    await newItem.save();
-    response.json(newItem);
+    if (request.session?.employee.admin) {
+      const newItem = new mongoose.models.items({
+        name,
+        ingredients,
+        categories,
+        price,
+      });
+      await newItem.save();
+      response.json(newItem);
+    } else {
+      response.status(401).json("Unauthorized");
+    }
   } catch (error) {
     console.error(error);
   }

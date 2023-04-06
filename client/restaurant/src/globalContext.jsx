@@ -67,13 +67,11 @@ export const GlobalProvider = ({ children }) => {
     setIsLoading(true);
     const response = await fetch("/rest/items");
     const result = await response.json();
-    console.log(result);
     setItems([...result]);
     setIsLoading(false);
   };
 
   const postItem = async (name, ingredients, category, price) => {
-
     setIsLoading(true);
     const response = await fetch("/rest/items", {
       method: "POST",
@@ -81,24 +79,26 @@ export const GlobalProvider = ({ children }) => {
       body: JSON.stringify({
         name: name,
         ingredients: ingredients,
-        categories: {_id: category},
-        price: price
+        categories: { _id: category },
+        price: price,
       }),
     });
     const result = await response.json();
     console.log(result);
     setIsLoading(false);
+    void getItems();
   };
 
-  const deleteItem = async (id)=> {
-    setIsLoading(true)
+  const deleteItem = async (id) => {
+    setIsLoading(true);
     const response = await fetch(`/rest/items/${id}`, {
-      method: "DELETE"}
-        )
-    const result = await response.json()
-    console.log(result)
-    setIsLoading(false)
-  }
+      method: "DELETE",
+    });
+    const result = await response.json();
+    console.log(result);
+    setIsLoading(false);
+    void getItems();
+  };
 
   return (
     <GlobalContext.Provider
@@ -110,7 +110,7 @@ export const GlobalProvider = ({ children }) => {
         items,
         getItems,
         postItem,
-        deleteItem
+        deleteItem,
       }}
     >
       {children}
