@@ -20,7 +20,6 @@ export const GlobalProvider = ({ children }) => {
     setIsLoading(true);
     const response = await fetch("/rest/test");
     const result = await response.json();
-    //console.log(result);
     setTests(result);
     setIsLoading(false);
   };
@@ -106,9 +105,7 @@ export const GlobalProvider = ({ children }) => {
     setIsLoading(true)
     const response = await fetch ('/rest/order')
     const result = await response.json()
-    console.log(result)
     setOrders(result)
-    console.log(result)
     setIsLoading(false)
   }
 
