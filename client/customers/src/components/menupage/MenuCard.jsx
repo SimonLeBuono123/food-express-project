@@ -1,10 +1,10 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import globalContext from "../../globalContext.jsx";
 
 
-function MenuCard({details, handleClick}) {
-    const {setOrderArray, orderArray, items} = useContext(globalContext)
-    const {_id, name, ingredients, categories, price} = details
+function MenuCard({ details, handleClick }) {
+    const { setOrderArray, orderArray, items } = useContext(globalContext)
+    const { _id, name, ingredients, categories, price } = details
 
     function handleClick(e) {
         const filteredItem = items.filter((item) => item?._id === e.target.value)
@@ -13,13 +13,12 @@ function MenuCard({details, handleClick}) {
     }
 
     return (
-        <div className="bg-white w-64 h-32 flex flexbox flex-col rounded-xl shadow-lg pr-3 justify-center item-center">
-
-            <h3 className="text-center underline" >{name}</h3>
-            <p>Ingredients: {ingredients}</p>
-             <p className="text-end">{categories.name}</p>
+        <div className="h-50 w-80 bg-slate-100 rounded-2xl ">
+            <h3 className="text-center font-semibold text-lg  bg-amber-200 rounded-t-xl " >{name}</h3>
+            <p className='group' >Ingredients: <p className='relative hidden group-focus-visible:'>{ingredients}</p></p>
+            <p className="relative bottom-12 left-64 italic">{categories.name}</p>
             <p className="text-end">{price}</p>
-            <button value={_id}  onClick={handleClick}>Place Order</button>
+            <button className="button" value={_id} onClick={handleClick}>Add Item</button>
         </div>
     );
 }
