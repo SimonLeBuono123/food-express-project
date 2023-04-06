@@ -7,11 +7,13 @@ export const GlobalProvider = ({ children }) => {
   const [tests, setTests] = useState([]);
   const [authentication, setAuthentication] = useState({ loggedIn: false });
   const [items, setItems] = useState([]);
+  const [orders, setOrders] = useState([])
 
   useEffect(() => {
     void getTests();
     void checkAuthentication();
     void getItems();
+    void getOrders()
   }, []);
 
   const getTests = async () => {
@@ -100,6 +102,16 @@ export const GlobalProvider = ({ children }) => {
     void getItems();
   };
 
+  const getOrders = async() => {
+    setIsLoading(true)
+    const response = await fetch ('/rest/order')
+    const result = await response.json()
+    console.log(result)
+    setOrders(result)
+    console.log(result)
+    setIsLoading(false)
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -111,6 +123,7 @@ export const GlobalProvider = ({ children }) => {
         getItems,
         postItem,
         deleteItem,
+        orders
       }}
     >
       {children}

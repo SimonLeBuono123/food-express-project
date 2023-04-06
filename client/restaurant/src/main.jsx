@@ -11,6 +11,7 @@ import {
 import LoginPage from "./pages/LoginPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import MenuPage from "./menu/MenuPage.jsx";
+import OrdersPage from "./orders/OrdersPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route index element={<HomePage />} />
       <Route path={"/login"} element={<LoginPage />} />
       <Route path={"/menu"} element={<MenuPage />} />
+      <Route path={"/orders"} element={<OrdersPage />} />
     </Route>
   )
 );
