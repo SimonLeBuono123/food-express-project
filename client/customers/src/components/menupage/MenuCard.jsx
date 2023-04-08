@@ -12,14 +12,22 @@ function MenuCard({ details, handleClick }) {
         return orderArray
     }
 
-    return (
-        <div className="h-50 w-80 bg-slate-100 rounded-2xl ">
-            <h3 className="text-center font-semibold text-lg  bg-amber-200 rounded-t-xl " >{name}</h3>
-            <p className='group' >Ingredients: <p className='relative hidden group-focus-visible:'>{ingredients}</p></p>
-            <p className="relative bottom-12 left-64 italic">{categories.name}</p>
-            <p className="text-end">{price}</p>
-            <button className="button" value={_id} onClick={handleClick}>Add Item</button>
+    return (<>
+        <div className="h-10 w-80 bg-slate-100 rounded-t-2xl p-0 m-0">
+            <h3 className='text-2xl text-center'>{name}</h3>
         </div>
+        <div className="w-80 h-20 bg-[url('/../../assets/no-image.png')] bg-contain bg-no-repeat bg-center">
+        </div>
+        <div className="h-10 w-80 bg-slate-100 rounded-b-2xl">
+            <div className='flex justify-between mt-1'>
+                <div className='group ml-3'>Ingredients
+                    <p className='invisible group-hover:visible bg-black text-slate-100 rounded'>{ingredients}</p>
+                </div>
+                <p className='italic mr-3'>{categories.name}</p>
+            </div>
+        </div>
+        <button className="button z-0" value={_id} onClick={handleClick}>{price} kr/st</button>
+    </>
     );
 }
 

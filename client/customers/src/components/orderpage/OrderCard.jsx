@@ -6,10 +6,12 @@ function OrderCard({ details }) {
 
     return (
         <>
-            <div>
-        <h3 className="text-center bg-sky-400 w-64 ">{isDelivered}</h3>
-        {items.map( item => <p>{item.name}</p>)}
-    </div>
+        <div className='flex flex-col justify-center items-center'>
+        <h3 className="bg-sky-400 w-64 ">{isDelivered}</h3>
+        <p className='w-64 text-center bg-sky-400'>
+        {items.map( item => {item.name})}
+        </p>
+        </div>
         </>
     );
 }
