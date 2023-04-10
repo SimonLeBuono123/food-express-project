@@ -73,13 +73,14 @@ export const GlobalProvider = ({ children }) => {
         setIsLoading(false)
     }
 
-    const postOrder = async(items) => {
+    const postOrder = async(items, totalPrice) => {
         setIsLoading(true)
         const response = await fetch('/rest/order', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                items
+                items,
+                totalPrice
             })
         })
         const result = await response.json()

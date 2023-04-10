@@ -7,12 +7,16 @@ import PreviewCard from "../components/orderpage/PreviewCard.jsx";
 function OrderPage() {
     const { orderArray,order, auth, postOrder } = useContext(globalContext)
     const viewOrders = order.filter((item) =>  item?.customers?.email === auth?.email)
+
+    const initialValue = 0;
+
+
+    const totalSum = orderArray.reduce((additive, item) => additive + item.price,
+        initialValue)
     function getRandomKey() {
         return Math.floor(Math.random() * 100000);
     }
 
-    console.log(orderArray.map(item => item.name))
-    console.log(order)
     return (<>
             <div className="flex flex-row justify-center item-center gap-2">
                 <div className="flex flex-wrap flex-col gap-4 p-10 justify-center bg-sky-500">
@@ -20,7 +24,7 @@ function OrderPage() {
                     {orderArray.length > 0 ? orderArray.map((item) => { return <PreviewCard key={getRandomKey()} details={item} /> }) : null}
                 </div>
             </div>
-            <button className='flex text-center justify-center align-center bg-sky-500 mt-3' onClick={() => { postOrder(orderArray) }}>Make order</button>
+            <button className='flex text-center justify-center align-center bg-sky-500 mt-3' onClick={() => { postOrder(orderArray, totalSum) }}>Make order</button>
 
             <div className="flex flex-row justify-center item-center gap-2">
                 <div className="flex flex-wrap flex-col gap-4 p-10 justify-center bg-sky-500">

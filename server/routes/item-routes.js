@@ -29,7 +29,7 @@ itemRoutes.post("/", async (request, response) => {
       response.status(401).json("Unauthorized");
     }
   } catch (error) {
-    console.error(error);
+    return console.error(error);
   }
 });
 

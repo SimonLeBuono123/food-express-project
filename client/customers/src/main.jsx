@@ -8,6 +8,7 @@ import RegisterForm from './components/RegisterForm'
 import LoginPage from './pages/LoginPage'
 import MenuPage from "./pages/MenuPage.jsx";
 import OrderPage from "./pages/OrderPage.jsx";
+import ResponsePage from "./pages/responsePage.jsx";
 
 
 const router = createBrowserRouter(
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
             <Route path={'/menu'} element={<MenuPage/>}></Route>
             <Route path={'/order'} element={<OrderPage/>}></Route>
             <Route path={'/register'} element={<RegisterForm/>}/>
+            <Route path={'/response'} element={<ResponsePage/>}></Route>
             <Route path={'/login'} element={<LoginPage/>}/>
         </Route>
     )
