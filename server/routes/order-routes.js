@@ -56,9 +56,9 @@ orderRouter.patch("/:id", async (request, response) => {
         request.params.id
       );
 
-      //kan ta bort härifrån
-      order.endDate = request.body.endDate;
+      order.pickupDate = request.body.pickupDate;
       order.isDelivered = request.body.isDelivered;
+      order.isAccepted = request.body.isAccepted;
       order.totalPrice = request.body.totalPrice;
       await order.save();
       response.status(201).json(order);

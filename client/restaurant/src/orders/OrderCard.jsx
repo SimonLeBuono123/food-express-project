@@ -7,18 +7,24 @@ export default function ({ allOrders, setAllOrders }) {
 
   function handleEstimatedTime() {
     setEstimatedTime(estimatedTime + 15);
-    console.log(estimatedTime);
   }
 
+  function calculatePickupDate() {
+      return new Date(Date.now() + estimatedTime * 60 * 1000)
+  }
+
+
   function confirmOrder(event, id) {
-    let newIsDelivered = `confirmed pickup in ${estimatedTime} minutes`;
-    let newEndDate = "2023-04-11T07:41:51.000Z";
-    let newTotalPrice = 999;
+    let newIsAccepted = true;
+    let newIsDelivered = false;
+    let newPickupDate = calculatePickupDate();
+    let newTotalPrice = calculateTotalPrice(id);
     let updatedOrders = allOrders.map((order) => {
       if (order._id === id) {
         return { ...order, 
+            isAccepted: newIsAccepted,
             isDelivered: newIsDelivered,
-            endDate: newEndDate,
+            pickupDate: newPickupDate,
             totalPrice: newTotalPrice
         };
       }
@@ -26,8 +32,9 @@ export default function ({ allOrders, setAllOrders }) {
       return order;
     });
     setAllOrders(updatedOrders);
-    patchOrder(id, newEndDate, newIsDelivered, newTotalPrice);
-    calculateTotalPrice(id)
+    patchOrder(id, newPickupDate, newIsDelivered, newIsAccepted, newTotalPrice);
+
+
     setEstimatedTime(0);
   }
 
@@ -38,13 +45,17 @@ export default function ({ allOrders, setAllOrders }) {
   });
 
   function calculateTotalPrice(_id) {
-let totalPrice = allOrders.map(order => {
+      let result = 0
+allOrders.map(order => {
     if (order._id === _id) {
-    [...order.items].map(item => {
-        console.log(item)
+    order.items.map(item => {
+        result = result + item.price
     })
+
 }
+
 })
+      return result
   }
 
   let ordersList = allOrders.map((order) => {
@@ -82,6 +93,7 @@ let totalPrice = allOrders.map(order => {
         <ul className="pl-4 mb-4">{itemsList}</ul>
         <p>{order.totalPrice} SEK</p>
         <p className="text-gray-600 text-sm">{order.isDelivered}</p>
+
       </li>
     );
   });

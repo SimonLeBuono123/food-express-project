@@ -109,14 +109,15 @@ export const GlobalProvider = ({ children }) => {
     setIsLoading(false);
   };
 
-  const patchOrder = async (_id, endDate, isDelivered, totalPrice) => {
+  const patchOrder = async (_id, pickupDate, isDelivered, isAccepted, totalPrice) => {
     setIsLoading(true);
     const response = await fetch(`/rest/order/${_id}`, {
       method: "PATCH",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
-        endDate: endDate,
+        pickupDate: pickupDate,
         isDelivered: isDelivered,
+        isAccepted: isAccepted,
         totalPrice: totalPrice,
       }),
     });
