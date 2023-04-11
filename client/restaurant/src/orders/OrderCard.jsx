@@ -29,7 +29,6 @@ export default function ({ allOrders, setAllOrders }) {
     });
     setAllOrders(updatedOrders);
     patchOrder(id, newPickupDate, newIsDelivered, newIsAccepted, newTotalPrice);
-
     setEstimatedTime(0);
   }
 
@@ -64,7 +63,7 @@ export default function ({ allOrders, setAllOrders }) {
     }
 
     if (!order.isAccepted) {
-      return "Waiting for confirmation.";
+      return "Waiting for confirmation";
     } else if (order.isAccepted) {
       return `Estimated delivery in: ${Math.round(
         (new Date(order.pickupDate) - Date.now()) / (1000 * 60)
@@ -86,12 +85,14 @@ export default function ({ allOrders, setAllOrders }) {
         </li>
       );
     });
-
+    const orderStatusClass = order.isDelivered
+      ? "border p-6 rounded-lg shadow-md mb-6 bg-gray-100"
+      : "border p-6 rounded-lg shadow-md mb-6";
     return (
-      <li key={order._id} className="border p-6 rounded-lg shadow-md mb-6">
+      <li key={order._id} className={orderStatusClass}>
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold">{order.customers.fullName}</h2>
-          {!order.isDelivered ? (
+          {!order.isAccepted ? (
             <button
               className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-lg"
               onClick={handleEstimatedTime}
@@ -100,7 +101,7 @@ export default function ({ allOrders, setAllOrders }) {
             </button>
           ) : null}
 
-          {(!order.isAccepted) ? 
+          {!order.isAccepted ? (
             <button
               className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-lg"
               id={order._id}
@@ -110,8 +111,7 @@ export default function ({ allOrders, setAllOrders }) {
             >
               Confirm
             </button>
-           : (
-            (!order.isDelivered) ?
+          ) : !order.isDelivered ? (
             <button
               className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-lg"
               id={order._id}
@@ -121,7 +121,7 @@ export default function ({ allOrders, setAllOrders }) {
             >
               Deliver
             </button>
-          : null)}
+          ) : null}
         </div>
         <p className="text-gray-600 text-sm">
           {formatOrderDate(order.placedDate)}
@@ -130,6 +130,9 @@ export default function ({ allOrders, setAllOrders }) {
           (Date.now() - new Date(order.placedDate)) / (1000 * 60)
         )} min ago`}</p>
         <ul className="pl-4 mb-4">{itemsList}</ul>
+        {!order.isAccepted ? (
+          <p>Confirm delivery in: {estimatedTime} min</p>
+        ) : null}
         {order.isAccepted ? <p>{order.totalPrice.toString()} SEK</p> : null}
 
         <p>{"Status: " + handleOrderStatus(order)}</p>
