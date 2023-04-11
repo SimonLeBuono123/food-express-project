@@ -9,9 +9,9 @@ export default function ({ allOrders, setAllOrders }) {
     setEstimatedTime(estimatedTime + 15);
   }
 
-  function confirmOrder(event, id) {
+  function confirmOrder(event, id, isDelivered) {
     let newIsAccepted = true;
-    let newIsDelivered = false;
+    let newIsDelivered = isDelivered;
     let newPickupDate = calculatePickupDate();
     let newTotalPrice = calculateTotalPrice(id);
     let updatedOrders = allOrders.map((order) => {
@@ -60,15 +60,15 @@ export default function ({ allOrders, setAllOrders }) {
 
   function handleOrderStatus(order) {
     if (order.isDelivered) {
-      return `Order delivered`;
+      return `Order delivered.`;
     }
 
     if (!order.isAccepted) {
-      return "Waiting for confirmation";
+      return "Waiting for confirmation.";
     } else if (order.isAccepted) {
-
-      return `Order confirmed, estimated delivery: ${Math.round(
-        (new Date(order.pickupDate) - Date.now()) / (1000 * 60))} min`;
+      return `Estimated delivery in: ${Math.round(
+        (new Date(order.pickupDate) - Date.now()) / (1000 * 60)
+      )} min`;
     }
   }
 
@@ -91,30 +91,46 @@ export default function ({ allOrders, setAllOrders }) {
       <li key={order._id} className="border p-6 rounded-lg shadow-md mb-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold">{order.customers.fullName}</h2>
-          <button
-            className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-lg"
-            onClick={handleEstimatedTime}
-          >
-            Add 15
-          </button>
-          <button
-            className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-lg"
-            id={order._id}
-            onClick={(event) => {
-              confirmOrder(event, order._id);
-            }}
-          >
-            Confirm
-          </button>
+          {!order.isDelivered ? (
+            <button
+              className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-lg"
+              onClick={handleEstimatedTime}
+            >
+              Add 15
+            </button>
+          ) : null}
+
+          {(!order.isAccepted) ? 
+            <button
+              className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-lg"
+              id={order._id}
+              onClick={(event) => {
+                confirmOrder(event, order._id, false);
+              }}
+            >
+              Confirm
+            </button>
+           : (
+            (!order.isDelivered) ?
+            <button
+              className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-lg"
+              id={order._id}
+              onClick={(event) => {
+                confirmOrder(event, order._id, true);
+              }}
+            >
+              Deliver
+            </button>
+          : null)}
         </div>
         <p className="text-gray-600 text-sm">
           {formatOrderDate(order.placedDate)}
         </p>
-        <p className="text-gray-500 text-sm mb-2">{`Wait time: ${Math.round(
+        <p className="text-gray-500 text-sm mb-2">{`Placed ${Math.round(
           (Date.now() - new Date(order.placedDate)) / (1000 * 60)
-        )} min`}</p>
+        )} min ago`}</p>
         <ul className="pl-4 mb-4">{itemsList}</ul>
-        {(order.isAccepted) ? <p>{order.totalPrice.toString()} SEK</p> : null}
+        {order.isAccepted ? <p>{order.totalPrice.toString()} SEK</p> : null}
 
         <p>{"Status: " + handleOrderStatus(order)}</p>
       </li>

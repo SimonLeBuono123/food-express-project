@@ -124,6 +124,7 @@ export const GlobalProvider = ({ children }) => {
     const result = await response.json();
     console.log(result);
     setIsLoading(false);
+    void getOrders();
   };
 
   return (
