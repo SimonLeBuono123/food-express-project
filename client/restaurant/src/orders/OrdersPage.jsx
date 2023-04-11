@@ -12,7 +12,7 @@ export default function () {
 //console.log(orders)
     return (
         <section className={"h-screen w-screen flex flex-col m-5 md:flex-row"}>
-            <OrderCard allOrders={allOrders} />
+            <OrderCard allOrders={allOrders} setAllOrders={setAllOrders} />
         </section>
     );
 }
