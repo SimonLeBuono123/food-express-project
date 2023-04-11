@@ -19,8 +19,6 @@ const orderSchema = new Schema({
 
 mongoose.model('orders', orderSchema)
 
-// mongoose.models.orders.watch().on('change', data => console.log(data))
-
 orderRouter.get('/', async (request, response) =>{
         const order = await mongoose.models.orders.find()
             .populate({path: 'items', select: 'name'})

@@ -13,16 +13,20 @@ export const GlobalProvider = ({ children }) => {
     const [items, setItems] = useState([])
     const [orderArray, setOrderArray] = useState([])
     const [order, setOrder] = useState([])
-    console.log(order)
+
     useEffect(() => {
         void getTests()
         void getItems()
         void checkAuth()
         void getOrder()
+
+        const intervalId = setInterval(() => {
+            getOrder();
+          }, 3000);
+          return () => {
+            clearInterval(intervalId);
+          };
     }, [])
-
-
-
 
 
     const checkAuth = async () => {
@@ -68,7 +72,7 @@ export const GlobalProvider = ({ children }) => {
         setIsLoading(true)
         const response = await fetch('/rest/items')
         const result = await response.json()
-        console.log(result)
+  
         setItems(result)
         setIsLoading(false)
     }
@@ -90,21 +94,19 @@ export const GlobalProvider = ({ children }) => {
 
 
 
-    const getOrder = async() => {
-        setIsLoading(true)
-        const response = await fetch ('/rest/order')
-        const result = await response.json()
-        console.log(result)
-        setOrder(result)
-        setIsLoading(false)
-    }
+    const getOrder = async () => {
+            setIsLoading(true)
+            const response = await fetch("/rest/order");
+            setOrder(await response.json());
+            setIsLoading(false)
+        }
 
 
     const getTests = async() => {
         setIsLoading(true)
         const response = await fetch('/rest/test')
         const result = await response.json()
-        console.log(result)
+
         setTests(result)
         setIsLoading(false)
     }
