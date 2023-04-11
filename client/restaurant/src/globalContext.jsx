@@ -7,13 +7,13 @@ export const GlobalProvider = ({ children }) => {
   const [tests, setTests] = useState([]);
   const [authentication, setAuthentication] = useState({ loggedIn: false });
   const [items, setItems] = useState([]);
-  const [orders, setOrders] = useState([])
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     void getTests();
     void checkAuthentication();
     void getItems();
-    void getOrders()
+    void getOrders();
   }, []);
 
   const getTests = async () => {
@@ -101,13 +101,29 @@ export const GlobalProvider = ({ children }) => {
     void getItems();
   };
 
-  const getOrders = async() => {
-    setIsLoading(true)
-    const response = await fetch ('/rest/order')
-    const result = await response.json()
-    setOrders(result)
-    setIsLoading(false)
-  }
+  const getOrders = async () => {
+    setIsLoading(true);
+    const response = await fetch("/rest/order");
+    const result = await response.json();
+    setOrders(result);
+    setIsLoading(false);
+  };
+
+  const patchOrder = async (_id, endDate, isDelivered, totalPrice) => {
+    setIsLoading(true);
+    const response = await fetch(`/rest/order/${_id}`, {
+      method: "PATCH",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({
+        endDate: endDate,
+        isDelivered: isDelivered,
+        totalPrice: totalPrice,
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    setIsLoading(false);
+  };
 
   return (
     <GlobalContext.Provider
@@ -120,7 +136,8 @@ export const GlobalProvider = ({ children }) => {
         getItems,
         postItem,
         deleteItem,
-        orders
+        orders,
+        patchOrder
       }}
     >
       {children}
