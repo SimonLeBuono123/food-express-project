@@ -1,18 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import globalContext from "../globalContext.jsx";
-import OrderCard from '../components/orderpage/orderCard.jsx';
+import OrderCard from '../components/orderpage/OrderCard.jsx';
 import PreviewCard from "../components/orderpage/PreviewCard.jsx";
 import { Link } from 'react-router-dom';
 
 
 function OrderPage() {
-    const { orderArray, order, auth, postOrder } = useContext(globalContext)
+    const { orderArray, order, auth, postOrder, getOrder} = useContext(globalContext)
     const viewOrders = order.filter((item) => item?.customers?.email === auth?.email)
     function getRandomKey() {
         return Math.floor(Math.random() * 100000);
     }
+setInterval(()=>{void getOrder()},5000)
 
-    console.log(orderArray.map(item => item.name))
+
     return (<>
         {orderArray.length === 0 ?
             <>
@@ -27,9 +28,10 @@ function OrderPage() {
                     <div className='bg-slate-300 w-1/2'>
                         {orderArray.length > 0 ? orderArray.map((item) => { return <PreviewCard key={getRandomKey()} details={item} /> }) : null}
                     </div>
-                    <button className='button' onClick={() => { postOrder(orderArray) }}>Place order</button>
+                    <button className='button' onClick={() => { postOrder(orderArray), setOrderArray }}>Place order</button>
                 </div>
                 <div className="flex flex-col items-center gap-2">
+
                     {viewOrders.length > 0 ? <h2 className="menuHeader">Your current orders:</h2> : null}
                     {viewOrders.length > 0 ?
                         viewOrders.map((item) => { return <OrderCard key={item['_id']} details={item} /> })

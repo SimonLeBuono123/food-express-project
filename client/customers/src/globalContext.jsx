@@ -139,7 +139,8 @@ export const GlobalProvider = ({ children }) => {
                 orderArray,
                 setOrderArray,
                 postOrder,
-                order
+                order,
+                getOrder
             }}
         >
             {children}

@@ -3,16 +3,19 @@ import mongoose, {Schema} from "mongoose"
 
 const orderRouter = Router()
 
-const orderSchema = new Schema(
-    {
-        items: [{type: mongoose.Schema.Types.ObjectId, ref: "items"}],
-        customers: {type: mongoose.Schema.Types.ObjectId, ref: "customers", required: true},
-        orderDate: {type: Date, default: Date()},
-        endDate: {type: Date, default: null},
-        isDelivered: {type: String, default: "Waiting for Restaurant"},
-        totalPrice: {type: Number, default: 0}
-    }
-)
+const orderSchema = new Schema({
+    items: [{ type: mongoose.Schema.Types.ObjectId, ref: "items" }],
+    customers: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "customers",
+      required: true,
+    },
+    placedDate: { type: Date, default: Date() },
+    pickupDate: { type: Date, default: null },
+    isAccepted: {type: Boolean, default: false},
+    isDelivered: { type: Boolean, default: false },
+    totalPrice: { type: Number, default: 0 },
+  });
 
 mongoose.model('orders', orderSchema)
 
