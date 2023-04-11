@@ -10,9 +10,10 @@ const orderSchema = new Schema({
     ref: "customers",
     required: true,
   },
-  orderDate: { type: Date, default: Date() },
-  endDate: { type: Date, default: null },
-  isDelivered: { type: String, default: "Waiting for Restaurant" },
+  placedDate: { type: Date, default: Date() },
+  pickupDate: { type: Date, default: null },
+  isAccepted: { type: Boolean, default: false },
+  isDelivered: { type: Boolean, default: false },
   totalPrice: { type: Number, default: 0 },
 });
 
@@ -23,7 +24,7 @@ mongoose.model("orders", orderSchema);
 orderRouter.get("/", async (request, response) => {
   const order = await mongoose.models.orders
     .find()
-    .populate({ path: "items", select: "name" })
+    .populate({ path: "items", select: ["name", "price"] })
     .populate({ path: "customers", select: ["fullName", "email"] })
     .exec();
   response.json(order);
