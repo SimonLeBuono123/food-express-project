@@ -14,6 +14,13 @@ export const GlobalProvider = ({ children }) => {
     void checkAuthentication();
     void getItems();
     void getOrders();
+    const intervalId = setInterval(() => {
+      getOrders();
+    }, 3000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   const getTests = async () => {
@@ -109,7 +116,13 @@ export const GlobalProvider = ({ children }) => {
     setIsLoading(false);
   };
 
-  const patchOrder = async (_id, pickupDate, isDelivered, isAccepted, totalPrice) => {
+  const patchOrder = async (
+    _id,
+    pickupDate,
+    isDelivered,
+    isAccepted,
+    totalPrice
+  ) => {
     setIsLoading(true);
     const response = await fetch(`/rest/order/${_id}`, {
       method: "PATCH",
@@ -139,7 +152,7 @@ export const GlobalProvider = ({ children }) => {
         postItem,
         deleteItem,
         orders,
-        patchOrder
+        patchOrder,
       }}
     >
       {children}
