@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import globalContext from "../../globalContext.jsx";
 import MenuCard from './MenuCard.jsx';
 
+
 export default function () {
     const { items } = useContext(globalContext)
     const filterDrink = items.filter(item => item.categories.name === "Drink")
