@@ -21,21 +21,24 @@ export default function ({ title, types, setTypes }) {
     return (
       <li
         key={type._id ? type._id : Math.random() * 999}
-        className="flex items-center justify-between m-5"
+        className="flex items-center justify-between my-1 bg-white rounded-lg shadow-sm px-6 py-4"
       >
-        <div>
-          <div className="flex">
-            <h2 className="font-bold">{type.name}</h2>
+        <div className={"border p-6 rounded-lg shadow-md mb-3 bg-gray-100 w-full"}>
+          <div className="flex items-center space-x-4">
+            <h2 className="text-lg font-medium text-gray-900">{type.name}</h2>
             <button
-              className="text-red-500 cursor-pointer"
+              className="text-sm font-medium text-red-600 focus:outline-none py-1 px-1 rounded-lg"
+
+
+
               id={type._id}
               onClick={handleClick}
             >
               DELETE
             </button>
           </div>
-          <p>{type.ingredients}</p>
-          <p>{type.price} SEK</p>
+          <p className="text-gray-500 text-sm">{type.ingredients}</p>
+          <p className="text-gray-900 font-medium">{type.price} SEK</p>
         </div>
       </li>
     );
@@ -43,7 +46,7 @@ export default function ({ title, types, setTypes }) {
 
   return (
     <div className="flex flex-col w-[20rem] md:m-4">
-      <h2 className="font-bold text-white bg-blue-500 p-1 flex justify-between cursor-pointer">
+      <h2 className="font-bold text-white bg-blue-500 p-1 flex justify-between cursor-pointer rounded">
         {title}{" "}
         {!isAdding ? (
           <button

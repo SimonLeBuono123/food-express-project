@@ -31,7 +31,7 @@ export default function () {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto mt-10">
+    <form onSubmit={handleSubmit} className="w-80 max-w-md mx-auto mt-10">
       <div className="mb-6">
         <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
           Email
