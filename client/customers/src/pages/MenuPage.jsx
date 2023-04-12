@@ -14,7 +14,7 @@ function MenuPage() {
     }
 
     return (<>
-        {orderArray.length > 0 ? 
+        {orderArray?.length > 0 ?
         <>
         <div className='flex flex-col fixed top-0 left-0 w-32 z-10'>
         <Link to={'/order'}><button className='button'>Place order</button></Link>

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import globalContext from "../../globalContext.jsx";
 
 
-function MenuCard({ details, handleClick }) {
+function MenuCard({ details}) {
     const { setOrderArray, orderArray, items } = useContext(globalContext)
     const { _id, name, ingredients, categories, price } = details
 
@@ -11,6 +11,18 @@ function MenuCard({ details, handleClick }) {
         setOrderArray(orderArray => [...orderArray, filteredItem[0]])
         return orderArray
     }
+    function removeArray(e){
+        const filteredItem = items.filter((item) => item?._id === e.target.value)
+        const index = orderArray.findIndex(({ _id }) => _id === filteredItem[0]._id);
+        if (index !== -1) {
+            setOrderArray([
+                ...orderArray.slice(0, index),
+                ...orderArray.slice(index + 1)
+            ]);
+        }
+        return orderArray
+    }
+
 
     return (<>
         <div className="h-10 w-80 bg-slate-100 rounded-t-2xl p-0 m-0">
@@ -26,8 +38,12 @@ function MenuCard({ details, handleClick }) {
                 <p className='italic mr-3'>{categories.name}</p>
             </div>
         </div>
-        <button className="button z-0" value={_id} onClick={handleClick}>{price} kr/st</button>
-    </>
+
+
+            <button className="button z-0" value={_id} onClick={handleClick}>{price} kr/st</button>
+            {  orderArray.some(item => item._id === _id) ?  <button className="button z-0" value={_id} onClick={removeArray}>remove</button> : null}
+
+        </>
     );
 }
 
