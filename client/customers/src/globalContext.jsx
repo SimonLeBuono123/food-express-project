@@ -92,8 +92,6 @@ export const GlobalProvider = ({ children }) => {
         void getOrder()
     }
 
-
-
     const getOrder = async () => {
             setIsLoading(true)
             const response = await fetch("/rest/order");
