@@ -6,10 +6,10 @@ export default function ({ allOrders, setAllOrders }) {
   const [estimatedTime, setEstimatedTime] = useState(0);
 
   function handleEstimatedTime(min) {
-    if (estimatedTime >= 0) {
-      if (Math.abs(min) !== min && estimatedTime - min >= 0) {
-    setEstimatedTime(estimatedTime + min);
-      }
+    if (estimatedTime <= 0 && min < 0) {
+      return
+    } else {
+      setEstimatedTime(estimatedTime + min);
     }
   }
 

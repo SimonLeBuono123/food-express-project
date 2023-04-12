@@ -12,7 +12,8 @@ export default function () {
     }, [orders]);
 //console.log(orders)
     return (
-        <section className={"h-screen w-screen flex flex-col m-5 md:flex-row"}>
+        <section className={"h-screen w-screen flex flex-col md:flex-row justify-start items-center mt-8"}>
+            <h2 className={"text-3xl m-4 font-bold"}>Orders</h2>
             <OrderCard allOrders={allOrders} setAllOrders={setAllOrders} />
         </section>
     );
