@@ -1,8 +1,4 @@
 import {createContext, useEffect, useState} from "react";
-import {json} from "react-router-dom";
-import * as trace_events from "trace_events";
-import orderPage from "./pages/OrderPage.jsx";
-
 
 const GlobalContext = createContext(null)
 

@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { useStates } from "react-easier"
 import { useState } from "react";
-import globalContext from "../globalContext.jsx";
+import globalContext from "../../globalContext.jsx";
 import { Link } from "react-router-dom";
 
+
 export default function () {
-    const { submitLogin, submitLogout, result, auth } = useContext(globalContext)
+    const { submitLogin, auth } = useContext(globalContext)
     const [inputs, setInputs] = useState({});
 
     const handleChange = (event) => {
@@ -17,17 +17,12 @@ export default function () {
     const handleSubmit = (event) => {
         event.preventDefault();
         submitLogin(inputs.email, inputs.password)
-
         setInputs({})
     }
 
-
     return (
-
         <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-
             {!auth?.loggedIn ?
-
                 <>
                     <h2 className="header">
                         Login
@@ -70,11 +65,7 @@ export default function () {
                     </form></> :
                 <Link to={"/menu"}><button className="button">Lets place an order</button></Link>
             }
-
-
         </div>
-
     );
-
 }
 

@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import { useState } from "react";
-import globalContext from "../globalContext.jsx";
+import globalContext from "../../globalContext.jsx";
 import { Link } from "react-router-dom";
+
 
 export default function () {
   const { registerAccount } = useContext(globalContext)
-
-
   const [inputs, setInputs] = useState({});
 
   const handleChange = (event) => {
@@ -21,18 +20,14 @@ export default function () {
     setInputs({})
   }
 
-
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-
         <h2 className="header">
           Register a new account
         </h2>
-
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
-
             <label htmlFor="name" className="sr-only">
               Name
             </label>
@@ -47,7 +42,6 @@ export default function () {
               className="roundedFieldTop"
               placeholder="Name"
             />
-
             <label htmlFor="email" className="sr-only">
               Email address
             </label>

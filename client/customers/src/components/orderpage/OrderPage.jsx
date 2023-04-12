@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import globalContext from "../globalContext.jsx";
-import PreviewCard from "../components/orderpage/PreviewCard.jsx";
+import globalContext from "../../globalContext.jsx";
+import PreviewCard from "./PreviewCard.jsx";
 import { Link } from 'react-router-dom';
-import OrderCardYellow from '../components/orderpage/OrderCardYellow.jsx';
-import OrderCardBlue from '../components/orderpage/OrderCardBlue.jsx';
-import OrderCardRed from '../components/orderpage/OrderCardRed.jsx';
-import getRandomKey from '../components/utility/getRandomKey.js';
+import OrderCardYellow from './OrderCardYellow.jsx';
+import OrderCardBlue from './OrderCardBlue.jsx';
+import OrderCardRed from './OrderCardRed.jsx';
+import getRandomKey from '../utility/getRandomKey.js';
 
 
 function OrderPage() {

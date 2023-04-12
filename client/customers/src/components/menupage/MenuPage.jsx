@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
-import MainMenu from '../components/menupage/MainMenu.jsx';
-import SideMenu from '../components/menupage/SideMenu.jsx';
-import DrinkMenu from '../components/menupage/DrinkMenu.jsx';
-import globalContext from "../globalContext.jsx";
-import PreviewCard from '../components/orderpage/PreviewCard.jsx';
+import MainMenu from './MainMenu.jsx';
+import SideMenu from './SideMenu.jsx';
+import DrinkMenu from './DrinkMenu.jsx';
+import globalContext from "../../globalContext.jsx";
+import PreviewCard from '../orderpage/PreviewCard.jsx';
+
 
 function MenuPage() {
     const { orderArray } = useContext(globalContext)

@@ -1,5 +1,6 @@
 import { useContext } from "react"
-import globalContext from "../globalContext"
+import globalContext from "../../globalContext"
+
 
 export default function(){
     const { auth, submitLogout } = useContext(globalContext)

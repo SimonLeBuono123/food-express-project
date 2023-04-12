@@ -1,6 +1,7 @@
 import React from 'react';
 import getRandomKey from '../utility/getRandomKey';
 
+
 export default function ({ details }) {
     const { items, isDelivered, isAccepted, pickupDate } = details
 
