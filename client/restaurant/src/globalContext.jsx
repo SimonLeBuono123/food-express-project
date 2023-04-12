@@ -13,7 +13,12 @@ export const GlobalProvider = ({ children }) => {
     void getTests();
     void checkAuthentication();
     void getItems();
-    void getOrders();
+    const intervalId = setInterval(() => {
+      void getOrders();
+    }, 3000);
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   const getTests = async () => {
@@ -130,9 +135,6 @@ export const GlobalProvider = ({ children }) => {
     const result = await response.json();
     console.log(result);
     setIsLoading(false);
-    setTimeout(() => {
-      getOrders();
-    }, 3000);
   };
 
   return (
