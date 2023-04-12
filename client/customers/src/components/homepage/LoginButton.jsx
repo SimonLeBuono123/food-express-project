@@ -5,10 +5,7 @@ export default function () {
   
   return (
     <Link to={"/login"}>
-      <button
-        className="button"
-        type="button"
-      >
+      <button className="button" type="button">
         Login
       </button>
     </Link>

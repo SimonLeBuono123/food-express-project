@@ -1,5 +1,6 @@
 import {createContext, useEffect, useState} from "react";
 
+
 const GlobalContext = createContext(null)
 
 export const GlobalProvider = ({ children }) => {
