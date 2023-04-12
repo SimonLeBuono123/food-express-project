@@ -7,7 +7,8 @@ export default function () {
     const [allOrders, setAllOrders] = useState([]);
 
     useEffect(() => {
-        setAllOrders(orders);
+        let filteredOrders = orders.filter(order => !order.isDelivered)
+        setAllOrders(filteredOrders);
     }, [orders]);
 //console.log(orders)
     return (

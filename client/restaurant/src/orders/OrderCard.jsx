@@ -5,8 +5,12 @@ export default function ({ allOrders, setAllOrders }) {
   const { patchOrder } = useContext(globalContext);
   const [estimatedTime, setEstimatedTime] = useState(0);
 
-  function handleEstimatedTime() {
-    setEstimatedTime(estimatedTime + 15);
+  function handleEstimatedTime(min) {
+    if (estimatedTime >= 0) {
+      if (Math.abs(min) !== min && estimatedTime - min >= 0) {
+    setEstimatedTime(estimatedTime + min);
+      }
+    }
   }
 
   function confirmOrder(event, id, isDelivered) {
@@ -92,14 +96,6 @@ export default function ({ allOrders, setAllOrders }) {
       <li key={order._id} className={orderStatusClass}>
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold">{order.customers.fullName}</h2>
-          {!order.isAccepted ? (
-            <button
-              className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-lg"
-              onClick={handleEstimatedTime}
-            >
-              Add 15
-            </button>
-          ) : null}
 
           {!order.isAccepted ? (
             <button
@@ -130,17 +126,32 @@ export default function ({ allOrders, setAllOrders }) {
           (Date.now() - new Date(order.placedDate)) / (1000 * 60)
         )} min ago`}</p>
         <ul className="pl-4 mb-4">{itemsList}</ul>
+        <div className="flex flex-row items-center">
         {!order.isAccepted ? (
           <p>Confirm delivery in: {estimatedTime} min</p>
         ) : null}
+          {!order.isAccepted ? (
+            <button
+              className="text-white bg-blue-500 hover:bg-blue-600 m-1 p-1 rounded-lg"
+              onClick={() => {handleEstimatedTime(15)}}
+            >
+              +15
+            </button>
+          ) : null}
+           {!order.isAccepted ? (
+            <button
+              className="text-white bg-blue-500 hover:bg-blue-600 m-1 p-1 rounded-lg"
+              onClick={() => {handleEstimatedTime(-15)}}
+            >
+              -15
+            </button>
+          ) : null}
+          </div>
         {order.isAccepted ? <p>{order.totalPrice.toString()} SEK</p> : null}
 
         <p>{"Status: " + handleOrderStatus(order)}</p>
       </li>
     );
-  });
-  ordersList = ordersList.sort((a, b) => {
-    a.orderDate - b.orderDate;
   });
 
   return <ul>{ordersList}</ul>;
