@@ -14,6 +14,7 @@ function MenuCard({ details}) {
         return orderArray
     }
     function removeArray(e){
+        setCount(count-1)
         const filteredItem = items.filter((item) => item?._id === e.target.value)
         const index = orderArray.findIndex(({ _id }) => _id === filteredItem[0]._id);
         if (index !== -1) {
@@ -43,7 +44,7 @@ function MenuCard({ details}) {
         </div>
 
 
-            <button className="button z-0" value={_id} onClick={handleClick}>{price} kr/st</button>
+            <button className="button z-0" value={_id} onClick={handleAddClick}>{price} kr/st</button>
             {  orderArray.some(item => item._id === _id) ?  <button className="button z-0" value={_id} onClick={removeArray}>remove</button> : null}
 
         </>

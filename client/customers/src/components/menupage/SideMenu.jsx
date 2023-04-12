@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import globalContext from "../../globalContext.jsx";
 import MenuCard from './MenuCard.jsx';
 

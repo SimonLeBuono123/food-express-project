@@ -15,7 +15,7 @@ function OrderPage() {
 
     
     function handleClick() {
-        if (orderArray > 0) {
+        if (orderArray.length > 0) {
             postOrder(orderArray)
         }
         setOrderArray([])
