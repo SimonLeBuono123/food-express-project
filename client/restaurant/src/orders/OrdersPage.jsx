@@ -7,12 +7,13 @@ export default function () {
     const [allOrders, setAllOrders] = useState([]);
 
     useEffect(() => {
-        setAllOrders(orders);
+        let filteredOrders = orders.filter(order => !order.isDelivered)
+        setAllOrders(filteredOrders);
     }, [orders]);
-//console.log(orders)
     return (
-        <section className={"h-screen w-screen flex flex-col m-5 md:flex-row"}>
-            <OrderCard allOrders={allOrders} />
+        <section className={"h-screen w-screen flex flex-col justify-start items-center mt-8"}>
+            <h2 className={"text-3xl m-4 font-bold"}>Orders</h2>
+            <OrderCard allOrders={allOrders} setAllOrders={setAllOrders} />
         </section>
     );
 }
