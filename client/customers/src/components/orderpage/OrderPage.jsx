@@ -2,31 +2,22 @@ import React, { useContext } from 'react';
 import globalContext from "../../globalContext.jsx";
 import PreviewCard from "./PreviewCard.jsx";
 import { Link } from 'react-router-dom';
-import OrderCardYellow from './OrderCardYellow.jsx';
-import OrderCardBlue from './OrderCardBlue.jsx';
-import OrderCardRed from './OrderCardRed.jsx';
 import getRandomKey from '../utility/getRandomKey.js';
 import GateKeeper from '../utility/gateKeeper.jsx';
+import PendingOrder from './PendingOrder.jsx';
+import AcceptedOrder from './AcceptedOrder.jsx';
+import DeliveredOrder from './DeliveredOrder.jsx';
 
 
 function OrderPage() {
     const { setOrderArray, orderArray, order, auth, postOrder } = useContext(globalContext)
     const viewOrders = order.filter((item) => item?.customers?.email === auth?.email)
 
-    function checkPending(arr) {
-        return arr.isAccepted === false && arr.isDelivered === false
-    }
-
-    function checkAccepted(arr) {
-        return arr.isAccepted === true
-    }
-
-    function checkDelivered(arr) {
-        return arr.isDelivered === true
-    }
+    
     function handleClick() {
-        if(orderArray>0){
-        postOrder(orderArray)}
+        if (orderArray > 0) {
+            postOrder(orderArray)
+        }
         setOrderArray([])
     }
 
@@ -41,24 +32,11 @@ function OrderPage() {
             </div>
             <button className='button' onClick={handleClick}>Place order</button>
         </div>
-
-        <div className="flex flex-col items-center gap-2">
-            {viewOrders.length > 0 ? <h2 className="menuHeader">Your current orders:</h2> : null}
-        </div>
-        
-        <div className="flex flex-row flex-wrap justify-center gap-2">
-            <div className='menu pt-6'>
-            <h1 className='header'>On hold</h1>
-                {viewOrders.filter(checkPending).map((item) => { return <OrderCardYellow key={item['_id']} details={item} /> })}
-            </div>
-            <div className='menu pt-6'>
-            <h1 className='header'>Pending</h1>
-                {viewOrders.filter(checkAccepted).map((item) => { return <OrderCardBlue key={item['_id']} details={item} /> })}
-            </div>
-            <div className='menu pt-6'>
-            <h1 className='header'>Completed</h1>
-                {viewOrders.filter(checkDelivered).map((item) => { return <OrderCardRed key={item['_id']} details={item} /> })}
-            </div>
+        <h2 className="header">Your orders:</h2>
+        <div className='flex flex-wrap gap-2 justify-center'>
+            <PendingOrder />
+            <AcceptedOrder />
+            <DeliveredOrder />
         </div>
     </>
     )
