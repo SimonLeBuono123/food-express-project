@@ -11,14 +11,20 @@ import DeliveredOrder from './DeliveredOrder.jsx';
 
 function OrderPage() {
     const { setOrderArray, orderArray, order, auth, postOrder } = useContext(globalContext)
-    const viewOrders = order.filter((item) => item?.customers?.email === auth?.email)
-
-    
+  
     function handleClick() {
         if (orderArray.length > 0) {
             postOrder(orderArray)
         }
         setOrderArray([])
+    }
+
+    function totalPrice() {
+        let sum = 0
+        for (let i = 0; i < orderArray.length; i++) {
+          sum = sum + orderArray[i].price
+        } 
+        return sum
     }
 
     return (<>
@@ -27,6 +33,7 @@ function OrderPage() {
 
         <div className="flex flex-col justify-center items-center gap-2">
             <h2 className="header">You are about to order</h2>
+            <p>it will cost {totalPrice()}</p>
             <div className='bg-slate-300'>
                 {orderArray.length > 0 ? orderArray.map((item) => { return <PreviewCard key={getRandomKey()} details={item} /> }) : null}
             </div>
