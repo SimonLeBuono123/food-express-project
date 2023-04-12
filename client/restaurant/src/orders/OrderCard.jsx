@@ -13,7 +13,7 @@ export default function ({ allOrders, setAllOrders }) {
     }
   }
 
-  function confirmOrder(event, id, isDelivered) {
+  function handleOrder(event, id, isDelivered) {
     let newIsAccepted = true;
     let newIsDelivered = isDelivered;
     let newPickupDate = calculatePickupDate();
@@ -102,7 +102,7 @@ export default function ({ allOrders, setAllOrders }) {
               className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-lg"
               id={order._id}
               onClick={(event) => {
-                confirmOrder(event, order._id, false);
+                handleOrder(event, order._id, false);
               }}
             >
               Confirm
@@ -112,7 +112,7 @@ export default function ({ allOrders, setAllOrders }) {
               className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-lg"
               id={order._id}
               onClick={(event) => {
-                confirmOrder(event, order._id, true);
+                handleOrder(event, order._id, true);
               }}
             >
               Deliver

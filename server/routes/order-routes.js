@@ -17,9 +17,7 @@ const orderSchema = new Schema({
   totalPrice: { type: Number, default: 0 },
 });
 
-mongoose.model("orders", orderSchema);
-
-// mongoose.models.orders.watch().on('change', data => console.log(data))
+mongoose.model('orders', orderSchema)
 
 orderRouter.get("/", async (request, response) => {
   const order = await mongoose.models.orders
