@@ -23,14 +23,11 @@ export default function ({ title, types, setTypes }) {
         key={type._id ? type._id : Math.random() * 999}
         className="flex items-center justify-between my-1 bg-white rounded-lg shadow-sm px-6 py-4"
       >
-        <div className={"border p-6 rounded-lg shadow-md mb-3 bg-gray-100 w-full"}>
+        <div className={"border p-6 rounded-lg shadow-md mb-3 bg-white w-full"}>
           <div className="flex items-center space-x-4">
             <h2 className="text-lg font-medium text-gray-900">{type.name}</h2>
             <button
-              className="text-sm font-medium text-red-600 focus:outline-none py-1 px-1 rounded-lg"
-
-
-
+              className="text-sm font-medium text-red-600 py-1 px-1 rounded-lg"
               id={type._id}
               onClick={handleClick}
             >
