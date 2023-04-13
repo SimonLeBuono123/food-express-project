@@ -79,13 +79,14 @@ export const GlobalProvider = ({ children }) => {
 
   const postItem = async (name, ingredients, category, price) => {
     setIsLoading(true);
+    console.log(name, ingredients, category, price)
     const response = await fetch("/rest/items", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
         name: name,
         ingredients: ingredients,
-        categories: { _id: category },
+        categories: {_id: category},
         price: price,
       }),
     });

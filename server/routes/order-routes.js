@@ -10,7 +10,7 @@ const orderSchema = new Schema({
     ref: "customers",
     required: true,
   },
-  placedDate: { type: Date, default: Date() },
+  placedDate: { type: Date, default: Date },
   pickupDate: { type: Date, default: null },
   isAccepted: { type: Boolean, default: false },
   isDelivered: { type: Boolean, default: false },
@@ -28,7 +28,7 @@ orderRouter.get("/", async (request, response) => {
   response.json(order);
 });
 
-orderRouter.post("/", async (request, response) => {
+orderRouter.post("/", async (request, response) => { //new date in method rather than schema
   const { items, isDelivered, totalPrice } = request.body;
   const newOrder = new mongoose.models.orders({
     items,
