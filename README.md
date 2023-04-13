@@ -39,5 +39,5 @@ cd server
     npm i express-session
 ```
 3.	establish a connection to MongoDB Atlas either with your own free account (https://www.mongodb.com/cloud/atlas/register) 
-4.	by replacing the URI in index.js (format: mongodb+srv://${name}@:${password}@${cluster-name}.a9dyz1j.mongodb.net/?retryWrites=true&w=majority)
- or request access from one of the project collaborators.
+by replacing the URI in index.js (format: mongodb+srv://${name}@:${password}@${cluster-name}.a9dyz1j.mongodb.net/?retryWrites=true&w=majority)
+or request access from one of the project collaborators.
