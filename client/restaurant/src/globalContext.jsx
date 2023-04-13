@@ -4,15 +4,15 @@ const GlobalContext = createContext(null);
 
 export const GlobalProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [tests, setTests] = useState([]);
   const [authentication, setAuthentication] = useState({ loggedIn: false });
   const [items, setItems] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    void getTests();
     void checkAuthentication();
     void getItems();
+    void getCategories();
     const intervalId = setInterval(() => {
       void getOrders();
     }, 3000);
@@ -20,14 +20,6 @@ export const GlobalProvider = ({ children }) => {
       clearInterval(intervalId);
     };
   }, []);
-
-  const getTests = async () => {
-    setIsLoading(true);
-    const response = await fetch("/rest/test");
-    const result = await response.json();
-    setTests(result);
-    setIsLoading(false);
-  };
 
   const checkAuthentication = async () => {
     setIsLoading(true);
@@ -79,14 +71,13 @@ export const GlobalProvider = ({ children }) => {
 
   const postItem = async (name, ingredients, category, price) => {
     setIsLoading(true);
-    console.log(name, ingredients, category, price)
     const response = await fetch("/rest/items", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
         name: name,
         ingredients: ingredients,
-        categories: {_id: category},
+        categories: { _id: category },
         price: price,
       }),
     });
@@ -137,10 +128,17 @@ export const GlobalProvider = ({ children }) => {
     setIsLoading(false);
   };
 
+  const getCategories = async () => {
+    setIsLoading(true);
+    const response = await fetch("/rest/categories");
+    const result = await response.json();
+    setCategories(result);
+    setIsLoading(false);
+  };
+
   return (
     <GlobalContext.Provider
       value={{
-        tests,
         submitLogin,
         submitLogout,
         authentication,
@@ -150,6 +148,7 @@ export const GlobalProvider = ({ children }) => {
         deleteItem,
         orders,
         patchOrder,
+        categories,
       }}
     >
       {children}

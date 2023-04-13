@@ -14,18 +14,11 @@ export default function ({ title, types, setTypes }) {
     setTypes(updatedItems);
   };
 
-  let category;
+  let category_id;
 
   const listItems = types.map((type) => {
-    category = type.categories._id;
-/*     console.log(typeof category)
-    if (category === undefined) {
-      category = prompt("Enter category 1. Main, 2. Side, 3. Drink:")
-      if (category == 1) {return category = "642bce08f9a5c6ba02496f4f"}
-      if (category == 2) {return category = "642bce4af9a5c6ba02496f51"}
-      if (category == 3) {return category = "642bce1d363ac655bf7b3a66"}
-    } */
- 
+    category_id = type.categories._id;
+
     return (
       <li
         key={type._id ? type._id : Math.random() * 999}
@@ -72,7 +65,11 @@ export default function ({ title, types, setTypes }) {
         )}
       </h2>
       {isAdding ? (
-        <NewItemForm category={category} types={types} setTypes={setTypes} />
+        <NewItemForm
+          category_id={category_id}
+          types={types}
+          setTypes={setTypes}
+        />
       ) : null}
       <ul>{listItems}</ul>
     </div>

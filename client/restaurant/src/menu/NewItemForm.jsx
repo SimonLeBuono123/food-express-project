@@ -1,37 +1,44 @@
 import { useState, useContext } from "react";
 import globalContext from "../globalContext";
 
-export default function ({ category, types, setTypes }) {
-  const { items } = useContext(globalContext);
+export default function ({ category_id, types, setTypes }) {
+  const { categories } = useContext(globalContext);
   const [name, setName] = useState();
   const [ingredients, setIngredients] = useState();
   const [price, setPrice] = useState();
-  const [categoryId, setCategoryId] = useState(null);
+  const [newCategory_id, setNewCategory_id] = useState(null);
   const { postItem } = useContext(globalContext);
+
+  function getCategoryId(categoryName) {
+    let categoryObject = categories.find((category) => {
+      if (category.name === categoryName) {
+        return category;
+      }
+    });
+    return categoryObject._id.toString();
+  }
 
   const handleSubmit = (event) => {
     let newItem;
     event.preventDefault();
-    console.log(category)
-    console.log(categoryId)
-   if (category === undefined) {
-    category = categoryId
-   }
-    postItem(name, ingredients, category, parseFloat(price));
+    if (category_id === undefined) {
+      category_id = newCategory_id;
+    }
+    postItem(name, ingredients, category_id, parseFloat(price));
     newItem = {
       name: name,
       ingredients: ingredients,
-      categories: { _id: category },
+      categories: { _id: category_id },
       price: price,
     };
-  
+
     let newItems = [...types, newItem];
     setTypes(newItems);
   };
 
   return (
     <form onSubmit={handleSubmit} className="mb-4">
-      <div className="mt-1 flex rounded-md shadow-sm flex flex-col">
+      <div className="mt-1 rounded-md shadow-sm flex flex-col">
         <input
           type="text"
           name="item"
@@ -56,19 +63,24 @@ export default function ({ category, types, setTypes }) {
           className="focus:ring-blue-500 focus:border-blue-500 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300"
           placeholder="Enter price"
         />
-        {(!category) ?    
-
-<select name="item" id="item">
-<option value={"642bce08f9a5c6ba02496f4f"} onClick={(event) => setCategoryId(event.target.value)}>Main</option>
-<option value={"642bce4af9a5c6ba02496f51"} onClick={(event) => setCategoryId(event.target.value)}>Side</option>
-<option value={"642bce1d363ac655bf7b3a66"} onClick={(event) => setCategoryId(event.target.value)}>Drink</option>
-</select>
-
-
- : null}
+        {!category_id ? (
+          <select
+            name="item"
+            id="item"
+            onChange={(event) => setNewCategory_id(event.target.value)}
+          >
+            <option className="font-bold" value={"Select a valid category"}>
+              Select a category
+            </option>
+            <option value={getCategoryId("Main")}>Main</option>
+            <option value={getCategoryId("Side")}>Side</option>
+            <option value={getCategoryId("Drink")}>Drink</option>
+          </select>
+        ) : null}
         <button
           type="submit"
           className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          disabled={newCategory_id === null}
         >
           Add
         </button>

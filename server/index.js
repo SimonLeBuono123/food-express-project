@@ -43,12 +43,6 @@ api.listen(port, () => {
   });
 });
 
-const categorySchema = new Schema({
-  name: { type: String, unique: true, primaryKey: true}}
-  ,{collection:  "categories" }
-)
-mongoose.model('categories', categorySchema)
-
 import testRouter from "./routes/test-routes.js";
 api.use("/rest/test", testRouter);
 
@@ -69,3 +63,6 @@ api.use("/rest/items", itemRoutes)
 
 import orderRouter from "./routes/order-routes.js"
 api.use("/rest/order", orderRouter)
+
+import categoryRouter from "./routes/categories-routes.js"
+api.use("/rest/categories", categoryRouter)

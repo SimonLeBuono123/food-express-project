@@ -17,7 +17,7 @@ const orderSchema = new Schema({
   totalPrice: { type: Number, default: 0 },
 });
 
-mongoose.model('orders', orderSchema)
+mongoose.model("orders", orderSchema);
 
 orderRouter.get("/", async (request, response) => {
   const order = await mongoose.models.orders
@@ -28,7 +28,8 @@ orderRouter.get("/", async (request, response) => {
   response.json(order);
 });
 
-orderRouter.post("/", async (request, response) => { //new date in method rather than schema
+orderRouter.post("/", async (request, response) => {
+  //new date in method rather than schema
   const { items, isDelivered, totalPrice } = request.body;
   const newOrder = new mongoose.models.orders({
     items,
