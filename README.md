@@ -10,25 +10,26 @@ The project provided an excellent opportunity for the team to apply their skills
 ## **How to run locally**
 
 1.	Clone the project
-
-```bash
-https://github.com/SimonLeBuono123/food-express-project.git```
+https://github.com/SimonLeBuono123/food-express-project.git
 
 2.	Install local dependencies in the project directory
+```bash
 cd customers
 
     npm install
     npm install -D tailwindcss postcss autoprefixer
     npm install react-router-dom
     npm install react-easier
-
+```
+```bash
 cd restaurant
 
     npm install
     npm install -D tailwindcss postcss autoprefixer
     npm install react-router-dom
     npm install react-easier
-
+```
+```bash
 cd server
 
     npm i mongoose
@@ -36,6 +37,7 @@ cd server
     npm i nodemon
     npm i concurrently nodemon
     npm i express-session
-
-3.	establish a connection to MongoDB Atlas either with your own free account (https://www.mongodb.com/cloud/atlas/register) by replacing the URI in index.js (format: mongodb+srv://${name}@:${password}@${cluster-name}.a9dyz1j.mongodb.net/?retryWrites=true&w=majority)
+```
+3.	establish a connection to MongoDB Atlas either with your own free account (https://www.mongodb.com/cloud/atlas/register) 
+4.	by replacing the URI in index.js (format: mongodb+srv://${name}@:${password}@${cluster-name}.a9dyz1j.mongodb.net/?retryWrites=true&w=majority)
  or request access from one of the project collaborators.
