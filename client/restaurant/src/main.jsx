@@ -8,8 +8,8 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import LoginPage from "./pages/LoginPage.jsx";
-import HomePage from "./pages/HomePage.jsx";
+import LoginPage from "./employee-account/LoginPage.jsx";
+import HomePage from "./home-page/HomePage.jsx";
 import MenuPage from "./menu/MenuPage.jsx";
 import OrdersPage from "./orders/OrdersPage.jsx";
 

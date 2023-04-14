@@ -1,7 +1,7 @@
 import OrdersButton from "../orders/OrdersButton.jsx";
 import MenuButton from "../menu/MenuButton.jsx";
-import LogInButton from "../components/LogInButton.jsx";
-import LogOutButton from "../components/LogOutButton.jsx";
+import LogInButton from "../employee-account/LogInButton.jsx";
+import LogOutButton from "../employee-account/LogOutButton.jsx";
 import { useContext } from "react";
 import globalContext from "../globalContext.jsx";
 
