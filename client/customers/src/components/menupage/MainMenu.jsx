@@ -8,9 +8,11 @@ export default function () {
     const filterMain = items.filter(item => item.categories.name === "Main")
 
     return (
-        <div className="menu">
+        <section className="menu">
+
             <h2 className="menuHeader">Main's</h2>
+
             {filterMain.map((item) => { return <MenuCard key={item['_id']} details={item} /> })}
-        </div>
+        </section>
     )
 }

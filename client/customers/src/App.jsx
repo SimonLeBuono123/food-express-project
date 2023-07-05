@@ -6,7 +6,7 @@ import LogOutButton from "./components/loginpage/LogOutButton";
 function App() {
   return (
       <GlobalProvider>
-        <LogOutButton/>
+        
         <Outlet />
       </GlobalProvider>
   );

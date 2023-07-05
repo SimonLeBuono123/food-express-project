@@ -8,9 +8,9 @@ export default function () {
     const filterSide = items.filter(item => item.categories.name === "Side")
 
     return (
-        <div className="menu">
+        <section className="menu">
             <h2 className="menuHeader">Side's</h2>
             {filterSide.map((item) => { return <MenuCard key={item['_id']} details={item} /> })}
-        </div>
+        </section>
     )
 }

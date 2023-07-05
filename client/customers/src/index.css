@@ -1,35 +1,35 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.menu {
-    @apply shadow-2xl flex flex-wrap flex-col items-center gap-4 px-10 pb-10 bg-sky-500 h-min
-}
-
-.header{
-    @apply mt-6 text-center text-3xl font-extrabold text-gray-900
-}
-
-.menuHeader {
-    @apply text-2xl text-center font-bold
-}
-
-.button {
-    @apply w-[8rem] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
-}
-.logOutButton {
-    @apply fixed right-0 w-[8rem] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
-}
+@import "./components/styles/anchor.css";
+@import "./components/styles/base.css";
+@import "./components/styles/button.css";
+@import "./components/styles/header.css";
+@import "./components/styles/main.css";
+@import "./components/styles/media.css";
+@import "./components/styles/section.css";
+@import "./components/styles//pages/login.css";
+@import "./components/styles//pages/menu.css";
+@import "./components/styles//pages/register.css";
+@import "./components/styles//pages/home.css";
+@import "./components/styles//pages/order.css";
 
 
-.roundedFieldTop {
-    @apply appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm
-}
+:root{
+    /* COLORS */
+    --darkText: #201613;
+    --background: #201613;
+    --section-background: #50261b;
+    --primary-button: #de2e02;
+    --secondary-button: #bb2f0c;
+    --accent: #8d2e16;
 
-.roundedFieldMiddle {
-    @apply appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm
-}
+    /* SCREEN SIZES 
+    --small-screen: 480px;
+    --medium-screen: 768px;
+    --large-screen: 1200px;
+    */
 
-.roundedFieldBottom {
-    @apply appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm
-}
+    /* TYPOGRAPHY */
+    --text: #f9f1f7;
+    --standard-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --standard-font-size: 1.125rem;
+    --standard-line-height: 1.6;
+    }

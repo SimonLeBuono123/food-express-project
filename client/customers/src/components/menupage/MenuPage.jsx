@@ -5,6 +5,7 @@ import SideMenu from './SideMenu.jsx';
 import DrinkMenu from './DrinkMenu.jsx';
 import globalContext from "../../globalContext.jsx";
 import GateKeeper from '../utility/gateKeeper.jsx';
+import LogOutButton from '../loginpage/LogOutButton.jsx';
 
 
 function MenuPage() {
@@ -15,17 +16,25 @@ function MenuPage() {
     }
 
     return (<>
-    <GateKeeper/>
-        <div className='flex flex-col fixed top-0 left-0 w-32 z-10'>
-        <Link to={'/order'}><button className='button'>View order</button></Link>
-        </div>
-   
-        <h1 className="w-full h-10 text-3xl text-center">Menu</h1>
-        <div className="flex flex-row flex-wrap justify-center gap-2">
+        <GateKeeper />
+        <header>
+            <nav>
+                <Link to={'/order'}><button className='icon cartIcon'></button></Link>
+                <LogOutButton />
+
+            </nav>
+        </header>
+
+        <main>
+            <div className='menuTopLogo'>
+                <div className='imageWrapper'>
+                    <img src='././assets/logo.jpg' />
+                </div>
+            </div>
             <MainMenu />
             <SideMenu />
             <DrinkMenu />
-        </div>
+        </main>
     </>
     );
 }

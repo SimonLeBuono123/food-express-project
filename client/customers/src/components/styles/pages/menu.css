@@ -1,0 +1,53 @@
+.menuTopLogo {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+    background-color: var(--section-background);
+
+    padding: 30px;
+        border-top-right-radius: 50px;
+        border-top-left-radius: 50px;
+
+    & .imageWrapper {
+
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        overflow: hidden; 
+        background-color: #090909;
+
+        & img {
+            transform:scale(2);
+
+            object-position: 28px 48px;
+        }
+    }
+
+
+}
+
+.menuNameAndPrice {
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid white;
+}
+
+.menuPrice {
+    border-left: 3px solid white;
+    padding: 5px;
+}
+
+.menuOrderAndButtons {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.menuIngredients {
+    font-style: italic;
+    font-size: 12px;
+
+    @media (max-width:480px) {
+        display: none;
+
+    }
+}

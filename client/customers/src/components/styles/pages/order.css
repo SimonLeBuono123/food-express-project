@@ -1,0 +1,72 @@
+.orderMain {
+
+
+    & section {
+        padding: 30px;
+        border-top-right-radius: 50px;
+        border-top-left-radius: 50px;
+
+        & h1 {
+            text-align: center;
+        }
+    }
+    & .header {
+        text-align: center;
+        margin: 20px 0;
+    }
+    & .orderResponseSection h1 {
+        text-align: center;
+        text-decoration: underline;
+    }
+
+
+
+    & .orderedItems {
+        display: flex;
+        gap: 22px;
+        flex-direction: column;
+        margin-top: 10px;
+
+        & .orderedItem {
+            display: flex;
+            justify-content: space-between;
+            
+
+            & p {
+                padding: 5px 15px;
+                border-left: 3px solid white;
+            }
+        }
+    }
+
+    & .totalPrice {
+        padding: 5px 15px;
+        text-align: end;
+    }
+     & .orderResponseSection {
+        border-radius: 0;
+        margin-bottom: 10px;
+
+        & .pendingOrderItemGroup{
+            padding: 15px;
+            width: fit-content;
+            margin-bottom: 15px;
+            border:0.5px solid gray;
+            border-radius: 5px;
+        }
+        & .ordersWrapper {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 22px
+        }
+        & h1, h2, h3 {
+            text-align: center;
+            margin: 0;
+            margin-bottom: 20px;
+        }
+        
+     }
+}
+

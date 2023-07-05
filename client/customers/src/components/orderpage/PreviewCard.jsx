@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
 
 export default function ({ details }) {
-    const { name } = details
-    
-    return (
-        <h3 className="bg-white text-center font-semibold rounded-xl" >{name}</h3>
+    const { name, price } = details
+
+    return (<>
+        <div className='orderedItem'>
+            <h3>{name}</h3>
+            <p>{price}.-</p>
+        </div>
+    </>
     );
 }

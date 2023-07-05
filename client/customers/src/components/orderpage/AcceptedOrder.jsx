@@ -13,11 +13,13 @@ export default function() {
 
     return(<>
 
-    <div className="flex flex-row flex-wrap justify-center gap-2">
-        <div className='menu pt-6'>
-            <h1 className='header'>Pending</h1>
+  
+        <section className="orderResponseSection">
+            <h1 className='header'>Cooking</h1>
+            <div className='ordersWrapper'>
             {viewOrders.filter(checkAccepted).map((item) => { return <OrderCardBlue key={item['_id']} details={item} /> })}
-        </div>
-    </div>
+            </div>
+        </section>
+  
     </>)
 }

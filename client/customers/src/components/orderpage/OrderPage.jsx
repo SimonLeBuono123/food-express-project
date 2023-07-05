@@ -7,6 +7,7 @@ import GateKeeper from '../utility/gateKeeper.jsx';
 import PendingOrder from './PendingOrder.jsx';
 import AcceptedOrder from './AcceptedOrder.jsx';
 import DeliveredOrder from './DeliveredOrder.jsx';
+import LogOutButton from '../loginpage/LogOutButton.jsx';
 
 
 function OrderPage() {
@@ -29,22 +30,32 @@ function OrderPage() {
 
     return (<>
         <GateKeeper />
-        <Link to={'/menu'}><button className='button' onClick={() => setOrderArray([])}>Go to the menu</button></Link>
+        <header>
+            <nav>
+            <Link to={'/menu'}><button className='icon homeIcon' onClick={() => setOrderArray([])}/></Link>
+                <LogOutButton />
+            </nav>
+        </header>
+        
 
-        <div className="flex flex-col justify-center items-center gap-2">
-            <h2 className="header">You are about to order</h2>
-            <p>it will cost {totalPrice()}</p>
-            <div className='bg-slate-300'>
+        <main className="orderMain">
+            <section>
+            <h1>You are about to order</h1>
+            <hr/>
+            <div className='orderedItems'>
                 {orderArray.length > 0 ? orderArray.map((item) => { return <PreviewCard key={getRandomKey()} details={item} /> }) : null}
             </div>
+            <p className='totalPrice'>Total price: {totalPrice()}.-</p>
             <button className='button' onClick={handleClick}>Place order</button>
-        </div>
+            </section>
+       
         <h2 className="header">Your orders:</h2>
-        <div className='flex flex-wrap gap-2 justify-center'>
+     
             <PendingOrder />
             <AcceptedOrder />
             <DeliveredOrder />
-        </div>
+      
+        </main>
     </>
     )
 }

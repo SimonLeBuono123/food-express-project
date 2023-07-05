@@ -1,0 +1,29 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    color-scheme: light dark;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+    font-family: var(--standard-font);
+    font-size: var(--standard-font-size);
+    color: var(--text);
+    line-height:var(--standard-line-height);
+    text-wrap: balance;
+}
+
+.largeText {
+    font-size: 50px;
+}
+
+h1, h2, h3, p{
+    cursor: default;
+}

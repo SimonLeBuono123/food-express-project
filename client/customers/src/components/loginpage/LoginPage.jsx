@@ -29,12 +29,12 @@ useEffect(()=>{
 
     return (
         
-        <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-            <h2 className="header">
+        <main className="loginMain">
+            <h2 className="largeText">
                 Login
             </h2>
-            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-                <div className="rounded-md shadow-sm -space-y-px">
+            <form onSubmit={handleSubmit}>
+              <div className="inputWrapper">
                     <label htmlFor="name" className="sr-only">
                         Email
                     </label>
@@ -63,18 +63,16 @@ useEffect(()=>{
                         className="roundedFieldBottom"
                         placeholder="Password"
                     />
-                </div>
-                <div className="flex justify-center items-center gap-2">
+                    </div>
+                <div className="formButtons">
                     <button type="submit" className="button"
                     >Login</button>
-                
-                
                     <button type="button" className="button" onClick={()=>{navigate(-1)}}
                     >Back</button>
                 </div>
             </form>
                 
-        </div>
+        </main>
     );
 }
 
